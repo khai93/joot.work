@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/rework/static/css/main.073c9b0a.css",
+    "main.js": "/rework/static/js/main.1a5b0049.js",
+    "static/js/787.90bdd58a.chunk.js": "/rework/static/js/787.90bdd58a.chunk.js",
+    "static/media/logo.svg": "/rework/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/rework/index.html",
+    "main.073c9b0a.css.map": "/rework/static/css/main.073c9b0a.css.map",
+    "main.1a5b0049.js.map": "/rework/static/js/main.1a5b0049.js.map",
+    "787.90bdd58a.chunk.js.map": "/rework/static/js/787.90bdd58a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.1a5b0049.js"
+  ]
+}
