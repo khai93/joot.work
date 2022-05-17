@@ -105,7 +105,7 @@ describe("Trie Data Structure", () => {
                 "cart", 
                 "carol", 
                 "carrier",
-            ]);
+            ].sort());
         });
 
         it('should limit the result length if passed in a limit argument', () => {
