@@ -11,10 +11,10 @@ describe("TrieNode Class", () => {
             const node2 = new TrieNode(null);
             const node3 = new TrieNode(undefined);
             const node4 = new TrieNode('');
-            expect(node.endNode).toBeFalsy();
-            expect(node2.endNode).toBeFalsy();
-            expect(node3.endNode).toBeFalsy();
-            expect(node4.endNode).toBeFalsy();
+            expect(node.endNode).toBe(false);
+            expect(node2.endNode).toBe(false);
+            expect(node3.endNode).toBe(false);
+            expect(node4.endNode).toBe(false);
         });
     
         it('should construct an array property neighbors of length 26', () => {
@@ -25,12 +25,6 @@ describe("TrieNode Class", () => {
 });
 
 describe("Trie Data Structure", () => {
-    describe("#constructor", () => {
-        it('should be constructed with a root node that is empty', () => {
-            const trie = new Trie();
-            expect(trie.rootNode).toStrictEqual(new TrieNode());
-        });
-    });
     describe("#insert", () => {
         it('should throw an error if given a non-string argument', () => {
             const trie = new Trie();
@@ -63,10 +57,17 @@ describe("Trie Data Structure", () => {
         it('should return true if Trie contains the item', () => {
             const trie = new Trie();
             trie.insert("test");
-            expect(trie.contains("test")).toBeTruthy();
-            expect(trie.contains("tes")).toBeFalsy();
-            expect(trie.contains("te")).toBeFalsy();
+            expect(trie.contains("test")).toBe(true);
         });
+        
+        it('should return false if Trie does not contain the item', () => {
+            const trie = new Trie();
+            trie.insert("test");
+            expect(trie.contains("tes")).toBe(false);
+            expect(trie.contains("te")).toBe(false);
+            expect(trie.contains("testing")).toBe(false);
+            expect(trie.contains("car")).toBe(false);
+        })
     });
 
     describe("#search", () => {
@@ -120,9 +121,9 @@ describe("Trie Data Structure", () => {
             trie.insert("carol");
             trie.insert("carrier");
 
-            expect(trie.search("car", 4).length).toBeLessThanOrEqual(4);
-            expect(trie.search("car", 1).length).toBeLessThanOrEqual(1);
-            expect(trie.search("car", 2).length).toBeLessThanOrEqual(2);
+            expect(trie.search("car", 4).length).toEqual(4);
+            expect(trie.search("car", 1).length).toEqual(1);
+            expect(trie.search("car", 2).length).toEqual(2);
         });
 
         it("should throw an erorr if not passed a postive non-zero integer", () => {
