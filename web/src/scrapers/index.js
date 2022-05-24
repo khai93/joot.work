@@ -10,7 +10,9 @@
  * @property {string} name - The name of the job post
  * @property {string} companyName - The company hiring for the job
  * @property {URL} companyLogoImage - A image url for the companies logo 
- * @property {Date} postedData  - Date when the job was posted
+ * @property {URL} companyLink - Link to the companies page
+ * @property {Date} postedDate  - Date when the job was posted
+ * @property {URL} jobLink - Link to the job
  */
 
 
@@ -26,7 +28,7 @@ function JobBoardScraper() {}
  * 
  * @param {string[]} keywords An array of words used for the search
  * @param {import("../api/currentLocation").LocationData} location Location to search in 
- * @returns {Promise<JobSearchResult[]>} An array of results containing info about jobs
+ * @returns {Promise<JobSearchResult[]>} An array of job search results
  */
 JobBoardScraper.prototype.searchJobs = (keywords, location) => {
     throw new Error("Not Implemented");

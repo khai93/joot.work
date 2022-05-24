@@ -1,0 +1,11 @@
+{
+  "name": "rework",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/khai93/rework.git",
+  "author": "khai93 <33293519+khai93@users.noreply.github.com>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "cors-anywhere": "^0.4.4"
+  }
+}

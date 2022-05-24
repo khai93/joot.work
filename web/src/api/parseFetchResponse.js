@@ -24,10 +24,9 @@ export async function parseFetchResponse(response) {
 export async function parseFetchResponseHTML(response) {
     response = await parseFetchResponse(response);
     const parser = new DOMParser();
-
     return {
         response,
-        _document: parser.parseFromString(response.text())
+        _document: parser.parseFromString(await response.text(), "text/html")
     };
 }
 

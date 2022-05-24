@@ -10,7 +10,10 @@ export const HomePage = () => {
 
     useEffect(() => {
         const linkedinApi = new LinkedinApi();
-        linkedinApi.searchJobs("web developer");
+        const search = async () => {
+            console.log(await linkedinApi.searchJobs("web developer"));
+        }
+        search();
     }, []);
 
     return (
