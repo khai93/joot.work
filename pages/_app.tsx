@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import '../app/di.ts';
-import '../styles/globals.css'
+import './styles/globals.css'
 import type { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {

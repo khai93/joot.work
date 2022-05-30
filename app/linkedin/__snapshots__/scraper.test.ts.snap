@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkedinJobScraper #search should return correct test data 1`] = `
+Array [
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/techoptimum?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Tech Optimum",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/web-developer-at-tech-optimum-3093685722?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=911jW2odcZucAgPrxZzSQA%3D%3D&position=1&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Web Developer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/caplight-technologies?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Caplight",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/frontend-engineer-at-caplight-3101058134?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=UasOjyxB54DO3md9fyJjHg%3D%3D&position=2&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Frontend engineer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/servicenow?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "ServiceNow",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/associate-software-engineer-front-end-at-servicenow-3091727672?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=Iv%2FW3AMMynGINGZwrmwulw%3D%3D&position=3&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Associate Software Engineer - Front End",
+    "postedDate": 2022-05-25T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/getrevela?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Revela",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/junior-front-end-developer-at-revela-3095974085?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=gPINv3avt4Uzgx9Dfjgjgg%3D%3D&position=4&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Junior Front-End Developer",
+    "postedDate": 2022-05-27T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/walgreens?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Walgreens",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/associate-software-engineer-at-walgreens-3096325954?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=nlh3pKNBH2sT9qZDncF6Ow%3D%3D&position=5&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Associate Software Engineer",
+    "postedDate": 2022-05-01T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/empowertoday?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Empower",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/web-developer-at-empower-3099499000?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=lohRQ2GAz73wIEpb24DOEg%3D%3D&position=6&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Web Developer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/empowertoday?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Empower",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/front-end-engineer-at-empower-3099491982?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=McwqZutiSDHkz7kOw6naOQ%3D%3D&position=7&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Front End Engineer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/empowertoday?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Empower",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/web-developer-at-empower-3099499005?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=CzqrND%2BAg1jQkCNN6ODL5A%3D%3D&position=8&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Web Developer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/kforce?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Kforce Inc",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/front-end-developer-at-kforce-inc-3095049866?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=3cT%2FdzIn9P9uSO48pScl%2Bg%3D%3D&position=9&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Front End Developer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/macguyvertech?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "MacguyverTech",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/front-end-developer-at-macguyvertech-3098352389?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=oQ%2BnBxZJIOYXe9PsY953IQ%3D%3D&position=10&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Front End Developer",
+    "postedDate": 2022-05-27T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/spacelined?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Spacelined",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/web-developer-at-spacelined-3099318046?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=hOfPUPHv%2BqzeObunybvbYw%3D%3D&position=11&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Web Developer",
+    "postedDate": 2022-05-29T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/walgreens?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Walgreens",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/associate-software-engineer-at-walgreens-3091035618?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=vKC3aAKTzzVsvQXLR8AnSA%3D%3D&position=12&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Associate Software Engineer",
+    "postedDate": 2022-04-28T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/net-inspect?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Net-Inspect, LLC",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/junior-front-end-developer-at-net-inspect-llc-3088264791?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=BRhw%2BXN5B722u0eTeK0cJA%3D%3D&position=13&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Junior Front-End Developer",
+    "postedDate": 2022-05-26T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/honeywell?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Honeywell",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/front-end-reactjs-developer-at-honeywell-3095273410?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=VQerVVgVaCvZXMR41y9UwQ%3D%3D&position=14&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Front End ReactJS Developer",
+    "postedDate": 2022-05-26T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/kforce?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Kforce Inc",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/frontend-developer-react-css-html-at-kforce-inc-3095055027?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=vfZFadYZ7n9jEpZl%2FD2bTA%3D%3D&position=15&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Frontend Developer (React, CSS, HTML)",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/vegan-outreach?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Vegan Outreach",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/web-developer-at-vegan-outreach-3095595522?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=Xx%2Bpm6i%2FDC%2F62RY5duqoPw%3D%3D&position=16&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Web Developer",
+    "postedDate": 2022-05-27T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/niantic?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Niantic, Inc.",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/web-developer-at-niantic-inc-3024132471?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=LfXEsYPFISoc8dEtfNzBAA%3D%3D&position=17&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Web Developer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/actalentservices?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Actalent",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/front-end-developer-remote-at-actalent-3102247046?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=eoNGRpwjYqhgTn8g%2BbXJPQ%3D%3D&position=18&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Front End Developer *REMOTE*",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/lockheed-martin?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Lockheed Martin",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/entry-level-full-stack-developer-at-lockheed-martin-3098610598?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=286%2BLqwQkV83Mr%2FRWmhyZQ%3D%3D&position=19&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Entry Level Full Stack Developer",
+    "postedDate": 2022-05-05T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/charterup?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "CharterUP",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/junior-software-engineer-full-stack-at-charterup-3089158274?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=gm0RpWynDLxc5B%2BL2vY63w%3D%3D&position=20&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Junior Software Engineer, Full-Stack",
+    "postedDate": 2022-05-27T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/foncii?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Foncii",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/full-stack-web-developer-at-foncii-3102262017?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=WQnxQlEFMrUgOwowXNYSpQ%3D%3D&position=21&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Full Stack Web Developer",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/trufl-app?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Trufl App",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/junior-web-developer-at-trufl-app-3072017189?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=QXXOuqMbpjLAWAvJWgUWbw%3D%3D&position=22&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Junior Web Developer",
+    "postedDate": 2022-05-14T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/charterup?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "CharterUP",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/junior-software-engineer-full-stack-at-charterup-3089151801?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=hlRiaNV0SolwuIjerw6Naw%3D%3D&position=23&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Junior Software Engineer, Full-Stack",
+    "postedDate": 2022-05-27T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/globallogic?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "GlobalLogic",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/front-end-engineer-irc155974-at-globallogic-3097401393?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=tOw9jZLtx4y%2B%2B0k6gWrc4Q%3D%3D&position=24&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Front end engineer IRC155974",
+    "postedDate": 2022-05-30T00:00:00.000Z,
+  },
+  Object {
+    "company": Object {
+      "link": "https://www.linkedin.com/company/best-buy?trk=public_jobs_jserp-result_job-search-card-subtitle",
+      "logoUrl": "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8",
+      "name": "Best Buy",
+    },
+    "description": "",
+    "link": "https://www.linkedin.com/jobs/view/full-stack-developer-at-best-buy-3093621582?refId=TsAfrqYZ9ZVwpDC5I89QdQ%3D%3D&trackingId=9ViMmlxsX82Je5JW2sZMlA%3D%3D&position=25&pageNum=0&trk=public_jobs_jserp-result_search-card",
+    "name": "Full Stack Developer",
+    "postedDate": 2022-05-29T00:00:00.000Z,
+  },
+]
+`;

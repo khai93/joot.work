@@ -5,11 +5,12 @@
 import 'reflect-metadata';
 import axios, { AxiosInstance } from "axios";
 import { Container } from "inversify";
+import { LinkedinJobScraper } from './linkedin';
 
 const TYPES = {};
 
 const container = new Container();
-
+container.bind<LinkedinJobScraper>(LinkedinJobScraper).toSelf()
 export {
     container
 };

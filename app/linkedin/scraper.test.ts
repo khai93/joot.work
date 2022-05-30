@@ -6,33 +6,26 @@ import { JobPost } from "@/core/JobPost";
 import { LinkedinJobScraper } from "./scraper";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+import fs from "fs/promises";
+import path from "path";
 
 const server = setupServer(
-    rest.get("https://linkedin.com", (req, res, ctx) => {
-        return res(ctx.json({pass: "OK"}))
+    rest.get("https://www.linkedin.com/jobs/search", async (req, res, ctx) => {
+        const mockHTMLPage = await fs.readFile(path.resolve(__dirname, "./__mocks__/linkedinSearchMock.html"));
+        
+        return res(ctx.set('Content-Type', 'text/html'), ctx.body(mockHTMLPage));
     })
 );
 
 beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
-
-const testData: JobPost[] = [{
-    name: "test",
-    company: {
-        name: "test",
-        logoUrl: new URL("https://test.com"),
-        link: new URL("https://google.com")
-    },
-    link: new URL("https://google.com"),
-    description: "A test job post",
-    postedDate: new Date()
-}];
 
 describe('LinkedinJobScraper', () => { 
     describe('#search', () => {
         it('should return correct test data', async () => {
             const scraper = new LinkedinJobScraper();
-            expect(await scraper.search(['test'])).toEqual(testData);
+            expect(await scraper.search(['test'])).toMatchSnapshot();
         });
     })
 })
