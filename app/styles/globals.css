@@ -1,0 +1,21 @@
+/* Copyright 2022 Nang Khai.  All rights reserved.
+   Use of this source code is governed by a GNU General Public License v3.0
+   license that can be found in the LICENSE file.
+*/
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
