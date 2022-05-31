@@ -29,6 +29,7 @@ export class LinkedinJobScraper implements JobScraperService {
         
         for (let i = 0;i < searchResults.length;i++) {
             const subtitle = searchResults[i].querySelector(".base-search-card__subtitle");
+            if (subtitle?.firstElementChild == null) continue;
             output.push({
                 name: searchResults[i]!.querySelector(".base-search-card__title")!.textContent!.trim(),
                 description: "",
