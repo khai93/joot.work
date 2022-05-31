@@ -36,7 +36,7 @@ export class LinkedinJobScraper implements JobScraperService {
                 company: {
                     name: subtitle!.firstElementChild!.innerHTML.trim(),
                     link: new URL(subtitle!.firstElementChild!.getAttribute("href")!),
-                    logoUrl: new URL(searchResults[i]!.querySelector(".artdeco-entity-image")!.getAttribute("data-ghost-url")!)
+                    logoUrl: new URL(searchResults[i]!.querySelector(".artdeco-entity-image")!.getAttribute("data-delayed-url")!)
                 },
                 postedDate: new Date(searchResults[i]!.querySelector("time")!.getAttribute("datetime")!),
                 link: new URL(searchResults[i]!.querySelector(".base-card__full-link")!.getAttribute("href")!)

@@ -14,6 +14,8 @@ export type JobPost = {
     link: URL
 }
 
+export type SerializedJobPost = ReturnType<typeof serializeJobPost>;
+
 /**
  * Serializes a JobPost object into a JSON parsable object
  * @param post 

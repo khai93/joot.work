@@ -8,15 +8,28 @@ import { ReactNode, useState } from "react";
 
 export interface SearchBarProps {
     primaryPlaceholder?: string,
+    primaryVal?: string,
+    setPrimaryVal?: (val: string) => void,
     secondaryPlaceholder?: string,
-    onSubmit?: (primaryVal: string, secondaryVal: string) => void,
+    secondaryVal?: string,
+    setSecondaryVal?: (val: string) => void,
+    loading?: boolean,
+    onSubmit?: () => void,
     children?: ReactNode
 }
 
-export default function SearchBar({children, primaryPlaceholder, secondaryPlaceholder, onSubmit }: SearchBarProps) {
-    const [primaryVal, setPrimaryval] = useState("");
-    const [secondaryVal, setSecondaryval] = useState("");
-    
+export function SearchBar({
+    children, 
+    primaryPlaceholder, 
+    secondaryPlaceholder, 
+    onSubmit, 
+    loading,
+    primaryVal,
+    setPrimaryVal,
+    secondaryVal,
+    setSecondaryVal
+}: SearchBarProps) {
+
     return (
         <Box display={{ lg: "flex" }}>
             <InputGroup>
@@ -29,7 +42,7 @@ export default function SearchBar({children, primaryPlaceholder, secondaryPlaceh
                     size="md" 
                     variant="outline"
                     value={primaryVal}
-                    onChange={(e) => setPrimaryval(e.target.value)}
+                    onChange={(e) => setPrimaryVal && setPrimaryVal(e.target.value)}
                 >
                     {
                         children
@@ -47,7 +60,7 @@ export default function SearchBar({children, primaryPlaceholder, secondaryPlaceh
                     size="md" 
                     variant="outline"
                     value={secondaryVal}
-                    onChange={(e) => setSecondaryval(e.target.value)}
+                    onChange={(e) => setSecondaryVal && setSecondaryVal(e.target.value)}
                 >
                     {
                         children
@@ -56,11 +69,13 @@ export default function SearchBar({children, primaryPlaceholder, secondaryPlaceh
             </InputGroup>
             <Button 
                 marginTop={{base: "0.5em", lg: "0"}} 
-                colorScheme='blue' 
+                colorScheme='teal' 
                 size="md" 
                 px="2em" 
                 width={{base: "100%", lg: "2em"}} 
-                onClick={() => onSubmit && onSubmit(primaryVal, secondaryVal)}
+                onClick={onSubmit}
+                isLoading={loading}
+                loadingText='Searching'
             >
                 Search
             </Button>
