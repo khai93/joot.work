@@ -12,6 +12,11 @@ const nextConfig = {
     }
 
     return config
+  },
+  images: {
+    dangerouslyAllowSVG: true,
+    domains: ['media-exp1.licdn.com'],
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   }
 }
 
