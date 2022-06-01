@@ -7,6 +7,8 @@ import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { Image } from "../Image";
 
 import Link from "next/link";
+import { useMemo, useState } from "react";
+import getTimeDifference from "@/app/util/getTimeDifference";
 
 export interface JobSearchResultProps {
     jobData: SerializedJobPost
@@ -15,6 +17,8 @@ export interface JobSearchResultProps {
 export default function JobSearchResult({
     jobData
 }: JobSearchResultProps) {
+    const prettyTimeDiff = useMemo(() => getTimeDifference(new Date(jobData.postedDate), new Date(Date.now())), [jobData]);
+
     return (
         <Flex
             padding="1em"
@@ -35,11 +39,21 @@ export default function JobSearchResult({
             <Box
                 margin="0"
             >
+                 <Text 
+                    fontSize={"xs"} 
+                    fontWeight={prettyTimeDiff.indexOf("hour") !== -1 ? "bold" : "semibold"}
+                    color={prettyTimeDiff.indexOf("hour") !== -1 ? "blue.500" : "gray.600"}
+                    mb="5px"
+                >
+                    Posted {prettyTimeDiff}
+                </Text>
                 <Heading
                     fontSize="lg"
                     margin="0"
                 >
-                    {jobData.name}
+                    <Link href={jobData.link}>
+                        {jobData.name}
+                    </Link>
                 </Heading>
                 <Text>
                     <Link href={jobData.company.link} target="_blank" rel="opopener noreferrer">

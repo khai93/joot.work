@@ -14,7 +14,9 @@ export default function JobSearchResultsMobile({
     jobResults
 }: JobSearchResultsProps) {
     return (
-        <Stack my="1em">
+        <Stack 
+            my="1em"
+        >
             {
                 jobResults.map(v => <JobSearchResult key={v.link} jobData={v} />)
             }

@@ -43,7 +43,7 @@ export default function SearchPage({searchResult}: SearchPageProps) {
     }, [searchResult])
 
     return (
-        <Container>
+        <Container minWidth={{lg:"40%"}}>
             <FilterSideBarDrawer isOpen={isOpen} onClose={onClose} />
             <Flex my={{base: "1em"}}>
                 <Heading fontSize="2xl" fontWeight={"bold"} marginRight="auto">Rework</Heading>
@@ -70,23 +70,6 @@ export default function SearchPage({searchResult}: SearchPageProps) {
             />
 
             <JobSearchResults jobResults={searchResult} />
-            <Grid display={{base: 'none', lg: 'block'}}>
-                <GridItem w="30%">
-
-                </GridItem>
-                <GridItem w='70%'>
-                    {
-                        searchResult.map(v => 
-                            <div key={v.link}>
-                                <h1>{v.name}</h1>
-                                <a href={v.company.link}>{v.company.name}</a>
-                                <a href={v.link}>Link to Job</a>
-                            </div>
-                        )
-                    }
-                </GridItem>
-            </Grid>
-            
         </Container>
     )
 }

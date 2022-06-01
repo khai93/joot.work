@@ -15,7 +15,7 @@ const nextConfig = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['media-exp1.licdn.com'],
+    domains: ['media-exp1.licdn.com', 'media-exp2.licdn.com'],
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   }
 }
