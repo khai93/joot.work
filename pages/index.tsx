@@ -9,18 +9,15 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const Home: NextPage = () => {
-  const [keywords, setKeywords] = useState("");
-  const [location, setLocation] = useState("");
   const [searching, setSearching] = useState(false);
   const router = useRouter();
   
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (keywords: string, location: string) => {
     setSearching(true);
     router.push({
       pathname: "/search",
       query: {
         keywords,
-        location
       }
     });
   }
@@ -40,10 +37,8 @@ const Home: NextPage = () => {
           primaryPlaceholder='Job Title, Company, or Keywords'
           secondaryPlaceholder='Location or try "Remote"'
           onSubmit={handleSearchSubmit}
-          primaryVal={keywords}
-          setPrimaryVal={setKeywords}
-          secondaryVal={location}
-          setSecondaryVal={setLocation}
+          defaultLocation={""}
+          defaultKeywords={""}
           loading={searching}
         />
       </Stack>

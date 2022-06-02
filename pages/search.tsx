@@ -23,11 +23,9 @@ export interface SearchPageProps {
 export default function SearchPage({searchResult}: SearchPageProps) {
     const [searching, setSearching] = useState(false);
     const router = useRouter();
-    const [keywords, setKeywords] = useState(router.query.keywords as string || "");
-    const [location, setLocation] = useState(router.query.location as string || "");
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const handleSearchSubmit = () => {
+    const handleSearchSubmit = (keywords: string, location: string) => {
         setSearching(true);
         router.push({
           pathname: "/search",
@@ -39,7 +37,9 @@ export default function SearchPage({searchResult}: SearchPageProps) {
     }
 
     useEffect(() => {
-        setSearching(false);
+        if (searching === true) {
+            setSearching(false);
+        }
     }, [searchResult])
 
     return (
@@ -62,10 +62,8 @@ export default function SearchPage({searchResult}: SearchPageProps) {
                 primaryPlaceholder='Job Title, Company, or Keywords'
                 secondaryPlaceholder='Location or try "Remote"'
                 onSubmit={handleSearchSubmit}
-                primaryVal={keywords}
-                setPrimaryVal={setKeywords}
-                secondaryVal={location}
-                setSecondaryVal={setLocation}
+                defaultKeywords={router.query.keywords as string || ""}
+                defaultLocation={router.query.location as string || ""}
                 loading={searching}
             />
 
@@ -91,10 +89,9 @@ export default function SearchPage({searchResult}: SearchPageProps) {
                     </Heading>
                     <FilterSideBarContent />
                 </GridItem>
-                <GridItem rowSpan={8} colSpan={4}>
+                <GridItem rowSpan={8} colSpan={6}>
                     <JobSearchResults jobResults={searchResult} />
                 </GridItem>
-                <GridItem rowSpan={8} colSpan={2} bg="blue"></GridItem>
             </Grid>
         </Container>
     )

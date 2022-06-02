@@ -4,17 +4,15 @@
 
 import { SearchIcon, StarIcon } from "@chakra-ui/icons";
 import { Box, Button, Input, InputGroup, InputLeftElement,  useColorModeValue } from "@chakra-ui/react";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, KeyboardEvent } from "react";
 
 export interface SearchBarProps {
     primaryPlaceholder?: string,
-    primaryVal?: string,
-    setPrimaryVal?: (val: string) => void,
+    defaultKeywords?: string,
     secondaryPlaceholder?: string,
-    secondaryVal?: string,
-    setSecondaryVal?: (val: string) => void,
+    defaultLocation?: string,
     loading?: boolean,
-    onSubmit?: () => void,
+    onSubmit?: (keywords: string, location: string) => void,
     children?: ReactNode
 }
 
@@ -22,16 +20,22 @@ export function SearchBar({
     children, 
     primaryPlaceholder, 
     secondaryPlaceholder, 
+    defaultKeywords,
+    defaultLocation,
     onSubmit, 
-    loading,
-    primaryVal,
-    setPrimaryVal,
-    secondaryVal,
-    setSecondaryVal
+    loading
 }: SearchBarProps) {
+    const [keywords, setKeywords] = useState(defaultKeywords || "");
+    const [location, setLocation] = useState(defaultLocation || "");
+
+    const handleKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
+        if (e.code === "Enter") {
+            onSubmit && onSubmit(keywords, location);
+        }
+    }
 
     return (
-        <Box display={{ lg: "flex" }}>
+        <Box display={{ lg: "flex" }} onKeyDown={handleKeyPress}>
             <InputGroup>
                 <InputLeftElement 
                     pointerEvents="none" 
@@ -41,8 +45,8 @@ export function SearchBar({
                     placeholder={primaryPlaceholder} 
                     size="md" 
                     variant="outline"
-                    value={primaryVal}
-                    onChange={(e) => setPrimaryVal && setPrimaryVal(e.target.value)}
+                    value={keywords}
+                    onChange={(e) => setKeywords(e.target.value)}
                 >
                     {
                         children
@@ -59,8 +63,8 @@ export function SearchBar({
                     placeholder={secondaryPlaceholder} 
                     size="md" 
                     variant="outline"
-                    value={secondaryVal}
-                    onChange={(e) => setSecondaryVal && setSecondaryVal(e.target.value)}
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                 >
                     {
                         children
@@ -70,10 +74,10 @@ export function SearchBar({
             <Button 
                 marginTop={{base: "0.5em", lg: "0"}} 
                 colorScheme='teal' 
-                size="md" 
+                size={{base: "md"}} 
                 px="2em" 
-                width={{base: "100%", lg: "2em"}} 
-                onClick={onSubmit}
+                minWidth={{base: "100%", lg: "4em"}} 
+                onClick={() => onSubmit && onSubmit(keywords, location)}
                 isLoading={loading}
                 loadingText='Searching'
             >
