@@ -2,13 +2,13 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
+import FilterSideBarContent from "@/app/components/FilterSideBar/FilterSideBarContent"
 import FilterSideBarDrawer from "@/app/components/FilterSideBar/FilterSideBarDrawer"
-import JobSearchResult from "@/app/components/JobSearchResults/JobSearchResult"
 import JobSearchResults from "@/app/components/JobSearchResults/JobSearchResults"
 import { SearchBar } from "@/app/components/SearchForm"
 import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPost"
 import { SettingsIcon } from "@chakra-ui/icons"
-import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure } from "@chakra-ui/react"
+import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure, Text } from "@chakra-ui/react"
 import { GetServerSideProps, GetServerSidePropsContext, NextPageContext, PreviewData } from "next"
 import { useRouter } from "next/router"
 import { ParsedUrlQuery } from "querystring"
@@ -43,7 +43,7 @@ export default function SearchPage({searchResult}: SearchPageProps) {
     }, [searchResult])
 
     return (
-        <Container minWidth={{lg:"40%"}}>
+        <Container minWidth={{lg: "60%"}}>
             <FilterSideBarDrawer isOpen={isOpen} onClose={onClose} />
             <Flex my={{base: "1em"}}>
                 <Heading fontSize="2xl" fontWeight={"bold"} marginRight="auto">Rework</Heading>
@@ -69,7 +69,33 @@ export default function SearchPage({searchResult}: SearchPageProps) {
                 loading={searching}
             />
 
-            <JobSearchResults jobResults={searchResult} />
+            <JobSearchResults display={{lg:"none"}}  jobResults={searchResult} />
+            <Grid
+                display={{base:"none", lg: "grid"}}
+                
+                templateRows='repeat(8, 1fr)'
+                templateColumns='repeat(8, 1fr)'
+                my="1em"
+                gap={2}
+            >
+                <GridItem rowSpan={8} colSpan={2} mt="1em">
+                    <Heading 
+                        size={"md"}
+                        fontWeight="semibold" 
+                        mb="1em" 
+                        pb="0.9em" 
+                        borderBottom="1px solid lightgray"
+                        mr="4em"
+                    >
+                        Search Filters
+                    </Heading>
+                    <FilterSideBarContent />
+                </GridItem>
+                <GridItem rowSpan={8} colSpan={4}>
+                    <JobSearchResults jobResults={searchResult} />
+                </GridItem>
+                <GridItem rowSpan={8} colSpan={2} bg="blue"></GridItem>
+            </Grid>
         </Container>
     )
 }

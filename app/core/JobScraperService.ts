@@ -7,7 +7,7 @@ import { Location } from "./Location";
 
 export type JobSearchFilter = {
     location?: Location,
-    remote?: boolean
+    remoteType?: number // 0 - In-office, 1 - Remote Only, 2 - Hybrid
 }
 
 /**

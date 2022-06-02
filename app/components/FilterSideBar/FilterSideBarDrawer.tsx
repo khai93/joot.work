@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import { Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay } from "@chakra-ui/react"
+import FilterSideBarContent from "./FilterSideBarContent"
 
 export interface FilterSideBarDrawerProps {
     isOpen: boolean,
@@ -22,9 +23,7 @@ export default function FilterSideBarDrawer({
                     Search Filters
                 </DrawerHeader>
                 <DrawerBody>
-                    <p>Test</p>
-                    <p>Test</p>
-                    <p>Test</p>
+                    <FilterSideBarContent />
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

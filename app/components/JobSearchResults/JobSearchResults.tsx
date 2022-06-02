@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import { JobPost, SerializedJobPost } from "@/core/JobPost";
-import { Heading, Stack } from "@chakra-ui/react";
+import { Heading, Stack, StackProps } from "@chakra-ui/react";
 import JobSearchResult from "./JobSearchResult";
 
 export interface JobSearchResultsProps {
@@ -11,11 +11,13 @@ export interface JobSearchResultsProps {
 }
 
 export default function JobSearchResultsMobile({
-    jobResults
-}: JobSearchResultsProps) {
+    jobResults,
+    ...rest
+}: JobSearchResultsProps & StackProps) {
     return (
         <Stack 
             my="1em"
+            {...rest}
         >
             {
                 jobResults.map(v => <JobSearchResult key={v.link} jobData={v} />)
