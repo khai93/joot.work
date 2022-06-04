@@ -6,11 +6,13 @@ import 'reflect-metadata';
 import axios, { AxiosInstance } from "axios";
 import { Container } from "inversify";
 import { LinkedinJobScraper } from './linkedin';
+import { IndeedJobScraper } from './indeed';
 
 const TYPES = {};
 
 const container = new Container();
-container.bind<LinkedinJobScraper>(LinkedinJobScraper).toSelf()
+container.bind<LinkedinJobScraper>(LinkedinJobScraper).toSelf();
+container.bind<IndeedJobScraper>(IndeedJobScraper).toSelf();
 export {
     container
 };

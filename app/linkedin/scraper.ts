@@ -13,7 +13,7 @@ export class LinkedinJobScraper implements JobScraperService {
 
     async search(keywords: string[], filters?: JobSearchFilter): Promise<JobPost[]> {
         const requestURL = new URL('https://www.linkedin.com/jobs/search/');
-        requestURL.searchParams.append("keywords", keywords.join(" "))
+        requestURL.searchParams.append("keywords", keywords.join(" "));
 
         const { _document } = await parseFetchResponseHTML(await fetch(requestURL.toString(), { 
             headers: {
@@ -39,6 +39,7 @@ export class LinkedinJobScraper implements JobScraperService {
                     logoUrl: new URL(searchResults[i]!.querySelector(".artdeco-entity-image")!.getAttribute("data-delayed-url")!)
                 },
                 postedDate: new Date(searchResults[i]!.querySelector("time")!.getAttribute("datetime")!),
+                formattedDate: null,
                 link: new URL(searchResults[i]!.querySelector(".base-card__full-link")!.getAttribute("href")!)
             });
         }

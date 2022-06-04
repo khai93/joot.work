@@ -44,3 +44,16 @@ export async function parseFetchResponseHTML(response: Response) {
         json: await response.json()
     };
 }
+
+/**
+ * A helper function to handle json string responses
+ * @param {Response} response
+ * @returns {Promise<{response: Response, json: Object}>} response
+ */
+ export async function parseFetchResponseText(response: Response) {
+    response = await parseFetchResponse(response);
+    return {
+        response,
+        _body: await response.text()
+    };
+}

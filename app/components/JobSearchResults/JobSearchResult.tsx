@@ -17,8 +17,9 @@ export interface JobSearchResultProps {
 export default function JobSearchResult({
     jobData
 }: JobSearchResultProps) {
-    const prettyTimeDiff = useMemo(() => getTimeDifference(new Date(jobData.postedDate), new Date(Date.now())), [jobData]);
-
+    const prettyTimeDiff = useMemo(() => jobData.postedDate != null ? getTimeDifference(new Date(jobData.postedDate), new Date(Date.now())) : jobData.formattedDate || "Time Unknown", [jobData]);
+    const isRecent = prettyTimeDiff.indexOf("hour") !== -1 || 
+                     prettyTimeDiff.includes('Today');
     return (
         <Flex
             padding="1em"
@@ -41,8 +42,8 @@ export default function JobSearchResult({
             >
                  <Text 
                     fontSize={"xs"} 
-                    fontWeight={prettyTimeDiff.indexOf("hour") !== -1 ? "bold" : "semibold"}
-                    color={prettyTimeDiff.indexOf("hour") !== -1 ? "blue.500" : "gray.600"}
+                    fontWeight={isRecent ? "bold" : "semibold"}
+                    color={isRecent ? "blue.500" : "gray.600"}
                     mb="5px"
                 >
                     Posted {prettyTimeDiff}

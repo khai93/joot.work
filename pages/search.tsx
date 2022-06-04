@@ -6,6 +6,7 @@ import FilterSideBarContent from "@/app/components/FilterSideBar/FilterSideBarCo
 import FilterSideBarDrawer from "@/app/components/FilterSideBar/FilterSideBarDrawer"
 import JobSearchResults from "@/app/components/JobSearchResults/JobSearchResults"
 import { SearchBar } from "@/app/components/SearchForm"
+import { IndeedJobScraper } from "@/app/indeed"
 import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPost"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure, Text } from "@chakra-ui/react"
@@ -104,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
     
     if (typeof(keywords) === "string") {
         try {
-            const scraper = container.get<LinkedinJobScraper>(LinkedinJobScraper);
+            const scraper = container.get<IndeedJobScraper>(IndeedJobScraper);
             searchResult = await scraper.search(keywords.split(" "));
         } catch (e) {
             console.error(e);

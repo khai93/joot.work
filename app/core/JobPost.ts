@@ -10,7 +10,8 @@ export type JobPost = {
         logoUrl: URL,
         link: URL
     },
-    postedDate: Date,
+    postedDate: Date | null,
+    formattedDate: string | null,
     link: URL
 }
 
@@ -27,6 +28,7 @@ export const serializeJobPost = (post: JobPost) => ({
         logoUrl: post.company.logoUrl.toString(),
         link: post.company.link.toString()
     },
-    postedDate: post.postedDate.toString(),
+    postedDate: post.postedDate?.toString() || null, // next.js needs null instead of undefined
+    formattedDate: post.formattedDate || null,
     link: post.link.toString()
 })
