@@ -29,7 +29,7 @@ const Home: NextPage = () => {
       backgroundColor={useColorModeValue("white.300", "white.300")}
     >
       <Stack spacing="1.5rem" my="auto">
-        <Stack spacing="0.5em">
+        <Stack spacing="0.5em" w="40em">
           <Heading>The internet's search engine for jobs.</Heading>
           <Text>Powered by the most popular job boards.</Text>
         </Stack>

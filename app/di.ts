@@ -13,6 +13,18 @@ const TYPES = {};
 const container = new Container();
 container.bind<LinkedinJobScraper>(LinkedinJobScraper).toSelf();
 container.bind<IndeedJobScraper>(IndeedJobScraper).toSelf();
+
+export const jobScrapers = [
+    {
+        name: 'linkedin',
+        get: () => container.get<LinkedinJobScraper>(LinkedinJobScraper)
+    },
+    {
+        name: 'indeed',
+        get: () => container.get<IndeedJobScraper>(IndeedJobScraper)
+    }
+];
+
 export {
     container
 };

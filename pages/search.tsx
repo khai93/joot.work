@@ -9,22 +9,25 @@ import { SearchBar } from "@/app/components/SearchForm"
 import { IndeedJobScraper } from "@/app/indeed"
 import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPost"
 import { SettingsIcon } from "@chakra-ui/icons"
-import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure, Text } from "@chakra-ui/react"
+import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure, Text, Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react"
 import { GetServerSideProps, GetServerSidePropsContext, NextPageContext, PreviewData } from "next"
 import { useRouter } from "next/router"
 import { ParsedUrlQuery } from "querystring"
 import { useEffect, useState } from "react"
-import { container } from "../app/di"
+import { container, jobScrapers } from "../app/di"
 import { LinkedinJobScraper } from "../app/linkedin"
 
 export interface SearchPageProps {
-    searchResult: SerializedJobPost[]
+
 }
 
-export default function SearchPage({searchResult}: SearchPageProps) {
+export default function SearchPage({}: SearchPageProps) {
     const [searching, setSearching] = useState(false);
+    const [activeEngineTab, setActiveEngineTab] = useState(0);
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const keywords = router.query.keywords as string || "";
 
     const handleSearchSubmit = (keywords: string, location: string) => {
         setSearching(true);
@@ -37,11 +40,9 @@ export default function SearchPage({searchResult}: SearchPageProps) {
         }, undefined, { shallow: false });
     }
 
-    useEffect(() => {
-        if (searching === true) {
-            setSearching(false);
-        }
-    }, [searchResult])
+    const handleActiveEngineChange = (index: number) => {
+        setActiveEngineTab(index);
+    }
 
     return (
         <Container minWidth={{lg: "60%"}}>
@@ -63,15 +64,27 @@ export default function SearchPage({searchResult}: SearchPageProps) {
                 primaryPlaceholder='Job Title, Company, or Keywords'
                 secondaryPlaceholder='Location or try "Remote"'
                 onSubmit={handleSearchSubmit}
-                defaultKeywords={router.query.keywords as string || ""}
+                defaultKeywords={keywords}
                 defaultLocation={router.query.location as string || ""}
                 loading={searching}
             />
+            
+            <Tabs 
+                index={activeEngineTab} 
+                onChange={handleActiveEngineChange}
+                mt="1em"
+                display={{lg: "none"}}
+            >
+                <TabList>
+                    {
+                        jobScrapers.map(v => <Tab key={v.name}>{v.name.charAt(0).toUpperCase() + v.name.slice(1)}</Tab>)
+                    }
+                </TabList>
+            </Tabs>
 
-            <JobSearchResults display={{lg:"none"}}  jobResults={searchResult} />
+            <JobSearchResults display={{lg:"none"}}  engineIndex={activeEngineTab} setSearching={setSearching} keywords={keywords} />
             <Grid
                 display={{base:"none", lg: "grid"}}
-                
                 templateRows='repeat(8, 1fr)'
                 templateColumns='repeat(8, 1fr)'
                 my="1em"
@@ -90,31 +103,24 @@ export default function SearchPage({searchResult}: SearchPageProps) {
                     </Heading>
                     <FilterSideBarContent />
                 </GridItem>
-                <GridItem rowSpan={8} colSpan={6}>
-                    <JobSearchResults jobResults={searchResult} />
+                <GridItem 
+                    rowSpan={8} 
+                    colSpan={6} 
+                >
+                    <Tabs  
+                        index={activeEngineTab} 
+                        onChange={handleActiveEngineChange}
+                        mt="1em"
+                    >
+                        <TabList>
+                            {
+                                jobScrapers.map(v => <Tab key={v.name}>{v.name.charAt(0).toUpperCase() + v.name.slice(1)}</Tab>)
+                            }
+                        </TabList>
+                    </Tabs>
+                    <JobSearchResults engineIndex={activeEngineTab} setSearching={setSearching} keywords={keywords}/>
                 </GridItem>
             </Grid>
         </Container>
     )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-    let searchResult: JobPost[] = [];
-
-    const { keywords, engines } = ctx.query;
-    
-    if (typeof(keywords) === "string") {
-        try {
-            const scraper = container.get<IndeedJobScraper>(IndeedJobScraper);
-            searchResult = await scraper.search(keywords.split(" "));
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    return {
-        props: {
-            searchResult: searchResult.map(serializeJobPost)
-        }
-    }
 }
