@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  web:
+    volumes:
+      - .:/app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: web
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: postgres
+    env_file:
+      - rework.conf
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "5432:5432"
