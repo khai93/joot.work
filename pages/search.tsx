@@ -6,16 +6,11 @@ import FilterSideBarContent from "@/app/components/FilterSideBar/FilterSideBarCo
 import FilterSideBarDrawer from "@/app/components/FilterSideBar/FilterSideBarDrawer"
 import JobSearchResults from "@/app/components/JobSearchResults/JobSearchResults"
 import { SearchBar } from "@/app/components/SearchForm"
-import { IndeedJobScraper } from "@/app/indeed"
-import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPost"
 import { SettingsIcon } from "@chakra-ui/icons"
-import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure, Text, Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react"
-import { GetServerSideProps, GetServerSidePropsContext, NextPageContext, PreviewData } from "next"
+import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
 import { useRouter } from "next/router"
-import { ParsedUrlQuery } from "querystring"
-import { useEffect, useState } from "react"
-import { container, jobScrapers } from "../app/di"
-import { LinkedinJobScraper } from "../app/linkedin"
+import { useState } from "react"
+import { jobScrapers } from "../app/di"
 
 export interface SearchPageProps {
 

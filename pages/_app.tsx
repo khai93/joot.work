@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 import { ChakraProvider } from '@chakra-ui/react'
-import '../app/di.ts';
 import './styles/globals.css'
 import type { AppProps } from 'next/app'
 

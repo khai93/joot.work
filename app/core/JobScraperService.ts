@@ -2,7 +2,7 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { JobPost } from "./JobPost";
+import { JobPost } from "./JobPostService";
 import { Location } from "./Location";
 
 export type JobSearchFilter = {
