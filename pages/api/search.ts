@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { container, jobScrapers, Symbols } from "@/app/di";
+import { PostgresJobPostService } from "@/app/postgres";
 import { PostgresCompanyService } from "@/app/postgres/companyService";
 import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPostService";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -30,10 +31,12 @@ export default async function handler(
           });
       }
 
-      const pgContainer = container.get<PostgresCompanyService>(Symbols.companyService);
-
+      
       if (typeof(keywords) === "string") {
           try {
+              const companyService = container.get<PostgresCompanyService>(Symbols.companyService);
+              const jobPostService = container.get<PostgresJobPostService>(Symbols.jobPostService);
+              await jobPostService.get({where: {job_id: 1}})
               const scraper = _engine.get();
               searchResult = await scraper.search(keywords.split(" "));
               return res.json({

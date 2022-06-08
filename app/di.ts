@@ -13,15 +13,18 @@ import { isServer } from './util/isServer';
 import { TypeScriptConfig } from 'next/dist/server/config-shared';
 import { CompanyService } from './core/CompanyService';
 import { PostgresCompanyService } from './postgres/companyService';
+import { PostgresJobPostService } from './postgres';
 
 export const Symbols = {
-    companyService: Symbol.for("companyService")
+    companyService: Symbol.for("companyService"),
+    jobPostService: Symbol.for("jobPostService")
 }
 
 const container = new Container();
 container.bind<LinkedinJobScraper>(LinkedinJobScraper).toSelf();
 container.bind<IndeedJobScraper>(IndeedJobScraper).toSelf();
 container.bind<PostgresCompanyService>(Symbols.companyService).to(PostgresCompanyService);
+container.bind<PostgresJobPostService>(Symbols.jobPostService).to(PostgresJobPostService);
 
 export const jobScrapers = [
     {

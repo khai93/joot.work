@@ -9,7 +9,7 @@ export type JobPost = {
     job_id?: number,
     job_title: string,
     company_id?: number,
-    company: Company,
+    company?: Partial<Company> | null,
     postedDate: Date | null, // If possible, get a Date object
     formattedDate: string | null, // If Date could not be extracted, get the formatted date from the engine's site
     job_link: URL,
@@ -33,8 +33,8 @@ export const serializeJobPost = (post: JobPost) => ({
     ...post,
     company: {
         ...post.company,
-        logoUrl: post.company.logoUrl.toString(),
-        company_link: post.company.company_link.toString()
+        logoUrl: post.company?.logoUrl?.toString(),
+        company_link: post.company?.company_link?.toString()
     },
     postedDate: post.postedDate?.toString() || null, // next.js needs null instead of undefined
     formattedDate: post.formattedDate || null,
@@ -45,8 +45,8 @@ export const parseJobPost = (post: SerializedJobPost): JobPost => ({
     ...post,
     company: {
         ...post.company,
-        logoUrl: new URL(post.company.logoUrl),
-        company_link: new URL(post.company.company_link)
+        logoUrl: new URL(post.company?.logoUrl || "https://placehold.jp/64x64.png"),
+        company_link: new URL(post.company?.company_link!)
     },
     postedDate: post.postedDate ? new Date(post.postedDate) : null,
     formattedDate: post.formattedDate || null,
