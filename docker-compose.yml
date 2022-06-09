@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.9"
 
 services:
   web:
@@ -16,10 +16,11 @@ services:
       - postgres
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:latest
     env_file:
-      - rework.conf
+      - .env.local
     volumes:
-      - ./data:/data/db
+      - ./data:/var/lib/postgresql/data
+      - ./app/postgres/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"

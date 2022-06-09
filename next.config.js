@@ -11,7 +11,9 @@ const nextConfig = {
       ...config.resolve.fallback,
       fs: false,
       child_process: false,
-      net: false
+      net: false,
+      dns: false,
+      "pg-native": false
     }
 
     return config
@@ -22,6 +24,7 @@ const nextConfig = {
       'media-exp1.licdn.com', 
       'media-exp2.licdn.com', 
       'static-exp1.licdn.com',
+      'static-exp2.licdn.com',
       'd2q79iu7y748jz.cloudfront.net',
       'placehold.jp'
     ],

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { JobPost, SerializedJobPost } from "@/core/JobPost";
+import { JobPost, SerializedJobPost } from "@/core/JobPostService";
 import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { Image } from "../Image";
 
@@ -29,8 +29,8 @@ export default function JobSearchResult({
         >
             <Box width="35px">
                 <Image 
-                    src={jobData.company.logoUrl} 
-                    alt={jobData.company.name + "'s Logo Image"} 
+                    src={jobData.company.logoUrl || "https://placehold.jp/64x64.png"} 
+                    alt={jobData.company.company_name + "'s Logo Image"} 
                     width={"100%"}
                     height={"100%"}
                     w="auto"
@@ -52,13 +52,13 @@ export default function JobSearchResult({
                     fontSize="lg"
                     margin="0"
                 >
-                    <Link href={jobData.link}>
-                        {jobData.name}
+                    <Link href={jobData.job_link}>
+                        {jobData.job_title}
                     </Link>
                 </Heading>
                 <Text>
-                    <Link href={jobData.company.link} target="_blank" rel="opopener noreferrer">
-                        {jobData.company.name}
+                    <Link href={jobData.company.company_link!} target="_blank" rel="opopener noreferrer">
+                        {jobData.company.company_name}
                     </Link>
                 </Text>
             </Box>

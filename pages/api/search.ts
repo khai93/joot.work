@@ -2,8 +2,10 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { jobScrapers } from "@/app/di";
-import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPost";
+import { container, jobScrapers, Symbols } from "@/app/di";
+import { PostgresJobPostService } from "@/app/postgres";
+import { PostgresCompanyService } from "@/app/postgres/companyService";
+import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPostService";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export type SearchApiResponse = {

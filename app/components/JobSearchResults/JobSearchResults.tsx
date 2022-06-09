@@ -3,15 +3,16 @@
 // license that can be found in the LICENSE file.
 
 import { jobScrapers } from "@/app/di";
-import { JobPost, SerializedJobPost } from "@/core/JobPost";
+import { JobPost, SerializedJobPost } from "@/core/JobPostService";
 import { SearchApiResponse } from "@/pages/api/search";
-import { Heading, Stack, StackProps } from "@chakra-ui/react";
+import { Stack, StackProps, Text } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import JobSearchResult from "./JobSearchResult";
 
 export interface JobSearchResultsProps {
     keywords: string,
     engineIndex: number,
+    searching: boolean,
     setSearching?: (b: boolean) => void;
 }
 
@@ -19,6 +20,7 @@ export default function JobSearchResultsMobile({
     keywords,
     engineIndex,
     setSearching,
+    searching,
     ...rest
 }: JobSearchResultsProps & StackProps) {
     const [jobResults, setJobResults] = useState<SerializedJobPost[]>([]);
@@ -40,8 +42,8 @@ export default function JobSearchResultsMobile({
                 setSearching && setSearching(false);
             })
             .catch(e => {
-                throw e
-            })
+                throw e;
+            });
     }, [engineIndex])
 
     return (
@@ -50,7 +52,9 @@ export default function JobSearchResultsMobile({
             {...rest}
         >
             {
-                jobResults.map(v => <JobSearchResult key={v.link} jobData={v} />)
+                searching ? 
+                <Text fontWeight={"light"}>Parsing the best matches...</Text> :
+                jobResults.map(v => <JobSearchResult key={v.job_link} jobData={v} />)
             }
         </Stack>
     )

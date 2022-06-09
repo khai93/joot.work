@@ -2,7 +2,7 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { JobPost } from "@/core/JobPost";
+import { JobPost } from "@/core/JobPostService";
 import { JobScraperService, JobSearchFilter } from "@/core/JobScraperService";
 import { injectable } from "inversify";
 import { parseFetchResponseHTML } from "../util/parseFetchResponse";
@@ -31,16 +31,15 @@ export class LinkedinJobScraper implements JobScraperService {
             const subtitle = searchResults[i].querySelector(".base-search-card__subtitle");
             if (subtitle?.firstElementChild == null) continue;
             output.push({
-                name: searchResults[i]!.querySelector(".base-search-card__title")!.textContent!.trim(),
-                description: "",
+                job_title: searchResults[i]!.querySelector(".base-search-card__title")!.textContent!.trim(),
                 company: {
-                    name: subtitle!.firstElementChild!.innerHTML.trim(),
-                    link: new URL(subtitle!.firstElementChild!.getAttribute("href")!),
+                    company_name: subtitle!.firstElementChild!.innerHTML.trim(),
+                    company_link: new URL(subtitle!.firstElementChild!.getAttribute("href")!),
                     logoUrl: new URL(searchResults[i]!.querySelector(".artdeco-entity-image")!.getAttribute("data-delayed-url")!)
                 },
                 postedDate: new Date(searchResults[i]!.querySelector("time")!.getAttribute("datetime")!),
                 formattedDate: null,
-                link: new URL(searchResults[i]!.querySelector(".base-card__full-link")!.getAttribute("href")!)
+                job_link: new URL(searchResults[i]!.querySelector(".base-card__full-link")!.getAttribute("href")!)
             });
         }
 
