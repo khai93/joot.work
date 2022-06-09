@@ -77,7 +77,7 @@ export default function SearchPage({}: SearchPageProps) {
                 </TabList>
             </Tabs>
 
-            <JobSearchResults display={{lg:"none"}}  engineIndex={activeEngineTab} setSearching={setSearching} keywords={keywords} />
+            <JobSearchResults display={{lg:"none"}} engineIndex={activeEngineTab} setSearching={setSearching} searching={searching} keywords={keywords}  />
             <Grid
                 display={{base:"none", lg: "grid"}}
                 templateRows='repeat(8, 1fr)'
@@ -113,7 +113,7 @@ export default function SearchPage({}: SearchPageProps) {
                             }
                         </TabList>
                     </Tabs>
-                    <JobSearchResults engineIndex={activeEngineTab} setSearching={setSearching} keywords={keywords}/>
+                    <JobSearchResults engineIndex={activeEngineTab} setSearching={setSearching} keywords={keywords} searching={searching}/>
                 </GridItem>
             </Grid>
         </Container>

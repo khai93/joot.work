@@ -31,12 +31,8 @@ export default async function handler(
           });
       }
 
-      
       if (typeof(keywords) === "string") {
           try {
-              const companyService = container.get<PostgresCompanyService>(Symbols.companyService);
-              const jobPostService = container.get<PostgresJobPostService>(Symbols.jobPostService);
-              await jobPostService.get({where: {job_id: 1}})
               const scraper = _engine.get();
               searchResult = await scraper.search(keywords.split(" "));
               return res.json({

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { JobPost } from "@/core/JobPost";
+import { JobPost } from "@/core/JobPostService";
 import { JobScraperService, JobSearchFilter } from "@/core/JobScraperService";
 import { injectable } from "inversify";
 import { parseFetchResponseHTML, parseFetchResponseText } from "../util/parseFetchResponse";
@@ -48,14 +48,13 @@ export class IndeedJobScraper implements JobScraperService {
         for (let result of Array.from(JSON.parse(`{${mainMatch[1]}}`).metaData.mosaicProviderJobCardsModel.results) as IndeedParseResult[]) {
             result = result as any;
             output.push({
-                name: result.title,
-                description: "",
+                job_title: result.title,
                 company: {
-                    name: result.company,
-                    link: new URL("https://www.indeed.com" + result.companyOverviewLink),
+                    company_name: result.company,
+                    company_link: new URL("https://www.indeed.com" + result.companyOverviewLink),
                     logoUrl: new URL(result.companyBrandingAttributes?.logoUrl || "http://placehold.jp/64x64.png")
                 },
-                link: new URL("https://www.indeed.com" + result.viewJobLink),
+                job_link: new URL("https://www.indeed.com" + result.viewJobLink),
                 postedDate: null,
                 formattedDate: result.formattedRelativeTime
             });
