@@ -20,7 +20,7 @@ CREATE TABLE job_post (
 CREATE TABLE search_cache (
   cache_id SERIAL PRIMARY KEY,
   keywords TEXT NOT NULL,
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   expired BOOLEAN DEFAULT FALSE
 );
 
