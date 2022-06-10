@@ -51,16 +51,16 @@ export default function JobSearchResult({
                 <Heading
                     fontSize="lg"
                     margin="0"
+                    _hover={{cursor: "pointer"}}
+                    onClick={() => window.open(jobData.job_link!, "Job Application", "toolbar=no,resizable=no,width=600,height=1000")}
                 >
-                    <Link href={jobData.job_link}>
-                        {jobData.job_title}
-                    </Link>
+                    {jobData.job_title}
                 </Heading>
-                <Text>
-                    <Link href={jobData.company.company_link!} target="_blank" rel="opopener noreferrer">
+                <a href={jobData.company.company_link!} target="_blank" rel="opopener noreferrer">
+                    <Text>
                         {jobData.company.company_name}
-                    </Link>
-                </Text>
+                    </Text>
+                </a>
             </Box>
         </Flex>
     )

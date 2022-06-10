@@ -4,6 +4,7 @@
 
 import { SearchIcon, StarIcon } from "@chakra-ui/icons";
 import { Box, Button, Input, InputGroup, InputLeftElement,  useColorModeValue } from "@chakra-ui/react";
+import { Icon } from "@iconify/react";
 import { ReactNode, useState, KeyboardEvent } from "react";
 
 export interface SearchBarProps {
@@ -13,6 +14,7 @@ export interface SearchBarProps {
     defaultLocation?: string,
     loading?: boolean,
     onSubmit?: (keywords: string, location: string) => void,
+    additionalButtons?: ReactNode[],
     children?: ReactNode
 }
 
@@ -23,6 +25,7 @@ export function SearchBar({
     defaultKeywords,
     defaultLocation,
     onSubmit, 
+    additionalButtons,
     loading
 }: SearchBarProps) {
     const [keywords, setKeywords] = useState(defaultKeywords || "");
@@ -35,54 +38,73 @@ export function SearchBar({
     }
 
     return (
-        <Box display={{ lg: "flex" }} onKeyDown={handleKeyPress}>
-            <InputGroup>
-                <InputLeftElement 
-                    pointerEvents="none" 
-                    children={<SearchIcon color={useColorModeValue("gray.300", "white.300")} />}
-                />
+        <Box 
+            display={{lg: "flex"}} 
+            flexDir="column" 
+            onKeyDown={handleKeyPress}
+        >
+            <Box display={{ lg: "flex" }}>
                 <Input 
                     placeholder={primaryPlaceholder} 
-                    size="md" 
+                    size="lg" 
                     variant="outline"
                     value={keywords}
+                    fontSize="16px"
+                    borderRadius={{base: "100px", lg: "100px 0 0 100px"}}
+                    pl="2em"
+                    py={{base: "1.6em", lg: "1.9em"}}
+                    mb={{base: "0.5em", lg: "0"}}
                     onChange={(e) => setKeywords(e.target.value)}
                 >
                     {
                         children
                     }
                 </Input>
-                
-            </InputGroup>
-            <InputGroup>
-                <InputLeftElement
-                    pointerEvents="none"
-                    children={<StarIcon color={useColorModeValue("gray.300", "white.300")} />}
-                />
                 <Input 
                     placeholder={secondaryPlaceholder} 
-                    size="md" 
+                    size="lg" 
                     variant="outline"
                     value={location}
+                    fontSize="16px"
+                    py={{base: "1.6em", lg: "1.9em"}}
+                    pl="2em"
+                    borderRadius={{base: "100px", lg: "0 100px 100px 0"}}
                     onChange={(e) => setLocation(e.target.value)}
                 >
                     {
                         children
                     }
                 </Input>
-            </InputGroup>
-            <Button 
-                marginTop={{base: "0.5em", lg: "0"}} 
-                colorScheme='teal' 
-                size={{base: "md"}} 
-                px="2em" 
-                minWidth={{base: "100%", lg: "4em"}} 
-                onClick={() => onSubmit && onSubmit(keywords, location)}
-                isLoading={loading}
-                loadingText='Searching'
+            </Box>
+            <Box 
+                display={{lg: "flex"}} 
+                mx="auto" 
+                my={{base: "0.5em", lg: "3em"}} 
+                gap="1em"
             >
-                Search
-            </Button>
+                <Button 
+                    marginTop={{base: "0.5em", lg: "0"}} 
+                    bg="primary.900"
+                    color="brandWhite.900"
+                    size={{base: "md"}} 
+                    px="1.5em" 
+                    py={{base: "1.5em", lg: "1.4em"}}
+                    width="full"
+                    borderRadius={{base: "100px", lg: "5px"}}
+                    minWidth={{base: "100%", lg: "4em"}} 
+                    onClick={() => onSubmit && onSubmit(keywords, location)}
+                    isLoading={loading}
+                    _hover={{
+                        transform: "scale(96%)",
+                    }}
+                    loadingText='Searching'
+                >
+                    Search for jobs.
+                </Button>
+                {
+                    additionalButtons
+                }
+            </Box>
         </Box>
     );
 }

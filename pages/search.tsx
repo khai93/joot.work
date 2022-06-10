@@ -5,9 +5,10 @@
 import FilterSideBarContent from "@/app/components/FilterSideBar/FilterSideBarContent"
 import FilterSideBarDrawer from "@/app/components/FilterSideBar/FilterSideBarDrawer"
 import JobSearchResults from "@/app/components/JobSearchResults/JobSearchResults"
+import JootLogo from "@/app/components/JootLogo"
 import { SearchBar } from "@/app/components/SearchForm"
 import { SettingsIcon } from "@chakra-ui/icons"
-import { Button, Container, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
+import { Button, Container, Image, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { jobScrapers } from "../app/di"
@@ -43,7 +44,7 @@ export default function SearchPage({}: SearchPageProps) {
         <Container minWidth={{lg: "60%"}}>
             <FilterSideBarDrawer isOpen={isOpen} onClose={onClose} />
             <Flex my={{base: "1em"}}>
-                <Heading fontSize="2xl" fontWeight={"bold"} marginRight="auto">Rework</Heading>
+                <JootLogo width="12em" />
                 <Button 
                     display={{lg: "none"}}
                     onClick={onOpen}
