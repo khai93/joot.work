@@ -10,5 +10,7 @@ export type SearchCache = {
 }
 
 export interface SearchCacheService {
-    
+    // Returns if the cache is expired or not
+    getExpiredStatus(keywords: string, engine: string): Promise<boolean | undefined>;
+    cache(keywords: string, engine: string): Promise<void>;
 }

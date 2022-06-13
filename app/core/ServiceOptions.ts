@@ -3,7 +3,10 @@
 // license that can be found in the LICENSE file.
 
 export type GetOptions<T> = {
-    where: Partial<T>
+    where: Partial<T> &
+    {
+        $search: string // full-text-search implementation
+    } 
 }
 
 export type UpdateOptions<T> = {

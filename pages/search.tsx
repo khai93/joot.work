@@ -9,6 +9,7 @@ import JootLogo from "@/app/components/JootLogo"
 import { SearchBar } from "@/app/components/SearchForm"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Button, Container, Image, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
+import { Icon } from "@iconify/react"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { jobScrapers } from "../app/di"
@@ -43,10 +44,15 @@ export default function SearchPage({}: SearchPageProps) {
     return (
         <Container minWidth={{lg: "60%"}}>
             <FilterSideBarDrawer isOpen={isOpen} onClose={onClose} />
-            <Flex my={{base: "1em"}}>
-                <JootLogo width="12em" />
+            <Flex 
+                my={{base: "1em"}} 
+                position="relative"
+            >
+                <JootLogo w="12em" mb="1em" />
                 <Button 
                     display={{lg: "none"}}
+                    position="absolute"
+                    right="0"
                     onClick={onOpen}
                     leftIcon={<SettingsIcon />}
                     colorScheme="telegram"
@@ -110,7 +116,13 @@ export default function SearchPage({}: SearchPageProps) {
                     >
                         <TabList>
                             {
-                                jobScrapers.map(v => <Tab key={v.name}>{v.name.charAt(0).toUpperCase() + v.name.slice(1)}</Tab>)
+                                jobScrapers.map(v => <Tab key={v.name}>
+                                    <Container p="0 0.25em 0 0">
+                                        <Icon icon={v.icon}/>
+                                    </Container>
+                                    
+                                    {v.name.charAt(0).toUpperCase() + v.name.slice(1)}
+                                </Tab>)
                             }
                         </TabList>
                     </Tabs>

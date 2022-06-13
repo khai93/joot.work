@@ -6,6 +6,7 @@ import { container, jobScrapers, Symbols } from "@/app/di";
 import { PostgresJobPostService } from "@/app/postgres";
 import { PostgresCompanyService } from "@/app/postgres/companyService";
 import { JobPost, SerializedJobPost, serializeJobPost } from "@/core/JobPostService";
+import { SearchCacheService } from "@/core/SearchCacheService";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export type SearchApiResponse = {
@@ -20,7 +21,14 @@ export default async function handler(
 ) {
     let searchResult: JobPost[] = [];
 
-      const { keywords, engine } = req.query;
+      const { keywords, engine} = req.query;
+
+      const cacheService = container.get<SearchCacheService>(Symbols.searchCacheService);
+      const cacheExpired = await cacheService.getExpiredStatus(keywords as string, engine as string);
+      
+      if (!cacheExpired) {
+        
+      }
 
       const _engine = jobScrapers.find(v => v.name === (engine as string || "linkedin").toLowerCase());
 

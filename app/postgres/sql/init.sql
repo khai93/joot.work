@@ -19,9 +19,9 @@ CREATE TABLE job_post (
 
 CREATE TABLE search_cache (
   cache_id SERIAL PRIMARY KEY,
-  keywords TEXT NOT NULL,
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  expired BOOLEAN DEFAULT FALSE
+  keywords TEXT NOT NULL UNIQUE,
+  engine_name VARCHAR(240) NOT NULL UNIQUE,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()

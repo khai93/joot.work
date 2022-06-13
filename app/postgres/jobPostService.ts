@@ -3,9 +3,11 @@
 // license that can be found in the LICENSE file.
 
 import { JobPost, JobPostService, parseJobPost } from "@/core/JobPostService";
+import { SearchCacheService } from "@/core/SearchCacheService";
 import { GetOptions, UpdateOptions } from "@/core/ServiceOptions";
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import { QueryResult } from "pg";
+import { Symbols } from "../di";
 import { connectionPool } from "./connection";
 
 @injectable()
@@ -13,7 +15,7 @@ export class PostgresJobPostService implements JobPostService {
     create(post: JobPost, engine: string): Promise<void> {
         return new Promise(async (resolve, reject) => {
             if (post.company_id === undefined) return reject("Company Id cannot be undefined");
-
+                 
             await connectionPool.query(
                 `INSERT INTO job_post (company_id, job_title, posted_date, formatted_date, engine_name, active, job_link) VALUES ($1, $2, to_timestamp($3), $4, $5, $6, $7)`,
                 [
@@ -25,7 +27,7 @@ export class PostgresJobPostService implements JobPostService {
                     true,
                     post.job_link.toString()
                 ]
-            ).catch(reject);
+            );
 
             return resolve();
         });
@@ -47,9 +49,9 @@ export class PostgresJobPostService implements JobPostService {
                 ) res;
                 `,
                 [opts.where.job_id]
-            ).catch(reject);
+            );
 
-            return resolve(parseJobPost((res as QueryResult<any>).rows[0].to_json));
+            return resolve(parseJobPost(res.rows[0].to_json));
         });
     }
     update(opts: UpdateOptions<JobPost>): Promise<void> {

@@ -26,6 +26,7 @@ export default function JobSearchResult({
             border="1px solid gray"
             borderRadius="4px"
             gap="20px"
+            _hover={{textDecor: "underline"}}
         >
             <Box width="35px">
                 <Image 
@@ -34,6 +35,7 @@ export default function JobSearchResult({
                     width={"100%"}
                     height={"100%"}
                     w="auto"
+                    textDecor="none"
                     h="auto"
                 />
             </Box>
