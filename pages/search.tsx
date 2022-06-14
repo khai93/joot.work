@@ -6,7 +6,7 @@ import FilterSideBarContent from "@/app/components/FilterSideBar/FilterSideBarCo
 import FilterSideBarDrawer from "@/app/components/FilterSideBar/FilterSideBarDrawer"
 import JobSearchResults from "@/app/components/JobSearchResults/JobSearchResults"
 import JootLogo from "@/app/components/JootLogo"
-import { SearchBar } from "@/app/components/SearchForm"
+import { SearchForm } from "@/app/components/SearchForm"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Button, Container, Image, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
 import { Icon } from "@iconify/react"
@@ -48,7 +48,6 @@ export default function SearchPage({}: SearchPageProps) {
                 my={{base: "1em"}} 
                 position="relative"
             >
-                <JootLogo w="12em" mb="1em" />
                 <Button 
                     display={{lg: "none"}}
                     position="absolute"
@@ -61,15 +60,6 @@ export default function SearchPage({}: SearchPageProps) {
                     Filters
                 </Button>
             </Flex>
-            
-            <SearchBar
-                primaryPlaceholder='Job Title, Company, or Keywords'
-                secondaryPlaceholder='Location or try "Remote"'
-                onSubmit={handleSearchSubmit}
-                defaultKeywords={keywords}
-                defaultLocation={router.query.location as string || ""}
-                loading={searching}
-            />
             
             <Tabs 
                 index={activeEngineTab} 
@@ -93,6 +83,7 @@ export default function SearchPage({}: SearchPageProps) {
                 gap={2}
             >
                 <GridItem rowSpan={8} colSpan={2} mt="1em">
+                <JootLogo w={{base: "12em", lg: "10em"}} mb="1em" />
                     <Heading 
                         size={"md"}
                         fontWeight="semibold" 
@@ -109,6 +100,16 @@ export default function SearchPage({}: SearchPageProps) {
                     rowSpan={8} 
                     colSpan={6} 
                 >
+                    <SearchForm
+                        primaryPlaceholder='Job Title, Company, or Keywords'
+                        secondaryPlaceholder='Location or try "Remote"'
+                        onSubmit={handleSearchSubmit}
+                        defaultKeywords={keywords}
+                        hideButtons={true}
+                        variant="compact"
+                        defaultLocation={router.query.location as string || ""}
+                        loading={searching}
+                    />
                     <Tabs  
                         index={activeEngineTab} 
                         onChange={handleActiveEngineChange}

@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import { JobPost } from "@/core/JobPostService";
-import { JobScraperService, JobSearchFilter } from "@/core/JobScraperService";
+import { JobSearchService, JobSearchFilter } from "@/core/JobSearchService";
 import { injectable } from "inversify";
 import { parseFetchResponseHTML, parseFetchResponseText } from "../util/parseFetchResponse";
 
@@ -24,7 +24,7 @@ export type IndeedParseResult = {
 }
 
 @injectable()
-export class IndeedJobScraper implements JobScraperService {
+export class IndeedJobScraper implements JobSearchService {
     async search(keywords: string[], filters?: JobSearchFilter): Promise<JobPost[]> {
         const requestURL = new URL("https://www.indeed.com/jobs");
         requestURL.searchParams.append("q", keywords.join(" "));

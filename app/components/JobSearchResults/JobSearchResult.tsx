@@ -47,6 +47,7 @@ export default function JobSearchResult({
                     fontWeight={isRecent ? "bold" : "semibold"}
                     color={isRecent ? "blue.500" : "gray.600"}
                     mb="5px"
+                    cursorEvents="none"
                 >
                     Posted {prettyTimeDiff}
                 </Text>

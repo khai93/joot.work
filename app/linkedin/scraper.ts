@@ -3,12 +3,12 @@
 // license that can be found in the LICENSE file.
 
 import { JobPost } from "@/core/JobPostService";
-import { JobScraperService, JobSearchFilter } from "@/core/JobScraperService";
+import { JobSearchService, JobSearchFilter } from "@/core/JobSearchService";
 import { injectable } from "inversify";
 import { parseFetchResponseHTML } from "../util/parseFetchResponse";
 
 @injectable()
-export class LinkedinJobScraper implements JobScraperService {
+export class LinkedinJobScraper implements JobSearchService {
     constructor() {}
 
     async search(keywords: string[], filters?: JobSearchFilter): Promise<JobPost[]> {

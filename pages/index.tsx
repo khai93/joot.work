@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import JootLogo from '@/app/components/JootLogo';
-import { SearchBar } from '@/app/components/SearchForm'
+import { SearchForm } from '@/app/components/SearchForm'
 import { useColorModeValue, Container, Stack, Button } from '@chakra-ui/react'
 import { Icon } from '@iconify/react';
 import type { NextPage } from 'next'
@@ -33,12 +33,13 @@ const Home: NextPage = () => {
     >
       <Stack spacing="2.6rem" width="100%" my="auto" >
         <JootLogo />
-        <SearchBar 
+        <SearchForm 
           primaryPlaceholder='Job Title, Company, or Keywords'
           secondaryPlaceholder='Location or try "Remote"'
           onSubmit={handleSearchSubmit}
           defaultLocation={""}
           defaultKeywords={""}
+          mb={{base: "0.5em", lg: "3em"}} 
           loading={searching}
           additionalButtons={[
             <a href="https://github.com/khai93/joot.work" target="_blank">

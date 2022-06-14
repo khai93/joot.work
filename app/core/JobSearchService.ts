@@ -11,8 +11,8 @@ export type JobSearchFilter = {
 }
 
 /**
- * JobScraperService are services that scrapes websites related to searching for jobs
+ * JobSearchService are services that scrapes websites related to searching for jobs
  */
-export interface JobScraperService {
+export interface JobSearchService {
     search(keywords: string[], filters?: JobSearchFilter): Promise<JobPost[]>;
 }
