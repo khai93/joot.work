@@ -17,6 +17,7 @@ export function useLocalStorage<T>(key: string, initialVal: T): [T, Dispatch<Set
     }, []);
 
     useEffect(() => {
+        if (value === initialVal) return;
         localStorage.setItem(key, JSON.stringify(value));
     }, [key, value]);
 

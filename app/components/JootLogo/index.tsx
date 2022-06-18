@@ -2,8 +2,7 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { forwardRef, Image } from "@chakra-ui/react"
-import { ImageProps } from "next/image";
+import { forwardRef, Image, ImageProps } from "@chakra-ui/react"
 import { useRouter } from "next/router";
 
 
@@ -13,7 +12,6 @@ const JootLogo = forwardRef<Omit<ImageProps, "src">, 'img'>((props, ref) => {
     return (
         <Image 
             src="/joot.work.svg" 
-            w={{base: "12em", lg: "18em"}}
             mx="auto"
             ref={ref}
             onClick={() => router.push("/")}
@@ -21,6 +19,6 @@ const JootLogo = forwardRef<Omit<ImageProps, "src">, 'img'>((props, ref) => {
             {...props}
         />
     )
-})
+});
 
 export default JootLogo;

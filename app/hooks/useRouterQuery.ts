@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 
 export function useRouterQuery(query: string): string {
     const router = useRouter();
-
+    const queryRegexMatch = router.asPath.match(new RegExp(`[&?]${query}=(.*)(&|$)`));
     return router.query[query] as string || 
-           router.asPath.match(new RegExp(`[&?]${query}=(.*)(&|$)`))![0] || 
+           queryRegexMatch ? decodeURIComponent(queryRegexMatch![1]).replace("+", " ") : null || 
            "";
 }

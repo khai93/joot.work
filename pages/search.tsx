@@ -7,6 +7,7 @@ import FilterSideBarDrawer from "@/app/components/FilterSideBar/FilterSideBarDra
 import JobSearchResults from "@/app/components/JobSearchResults/JobSearchResults"
 import JootLogo from "@/app/components/JootLogo"
 import { SearchForm } from "@/app/components/SearchForm"
+import { useRouterQuery } from "@/app/hooks/useRouterQuery"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Button, Container, Image, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
 import { Icon } from "@iconify/react"
@@ -24,7 +25,7 @@ export default function SearchPage({}: SearchPageProps) {
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const keywords = router.query.keywords as string || "";
+    const keywords = useRouterQuery("keywords");
 
     const handleSearchSubmit = (keywords: string, location: string) => {
         setSearching(true);

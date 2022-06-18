@@ -11,11 +11,15 @@ import { useMemo, useState } from "react";
 import getTimeDifference from "@/app/util/getTimeDifference";
 
 export interface JobSearchResultProps {
-    jobData: SerializedJobPost
+    jobData: SerializedJobPost,
+    visited?: boolean,
+    onClick?: () => void
 }
 
 export default function JobSearchResult({
-    jobData
+    jobData,
+    onClick,
+    visited
 }: JobSearchResultProps) {
     const prettyTimeDiff = useMemo(() => jobData.postedDate != null ? getTimeDifference(new Date(jobData.postedDate), new Date(Date.now())) : jobData.formattedDate || "Time Unknown", [jobData]);
     const isRecent = prettyTimeDiff.indexOf("hour") !== -1 || 
@@ -26,6 +30,8 @@ export default function JobSearchResult({
             border="1px solid gray"
             borderRadius="4px"
             gap="20px"
+            backgroundColor={visited ? "gray.100" : ""}
+            onClick={onClick}
             _hover={{textDecor: "underline"}}
         >
             <Box width="35px">
@@ -47,7 +53,7 @@ export default function JobSearchResult({
                     fontWeight={isRecent ? "bold" : "semibold"}
                     color={isRecent ? "blue.500" : "gray.600"}
                     mb="5px"
-                    cursorEvents="none"
+                    
                 >
                     Posted {prettyTimeDiff}
                 </Text>
