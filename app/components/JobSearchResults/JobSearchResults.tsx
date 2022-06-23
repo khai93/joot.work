@@ -4,7 +4,8 @@
 
 import { jobScrapers } from "@/app/di";
 import { useLocalStorage } from "@/app/hooks/useLocalStorage";
-import { JobPost, SerializedJobPost } from "@/core/JobPostService";
+import { useVisited } from "@/app/hooks/useVisited";
+import { JobPost, SerializedJobPost, } from "@/core/JobPostService";
 import { SearchApiResponse } from "@/pages/api/search";
 import { Stack, StackProps, Text } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
@@ -25,7 +26,7 @@ export default function JobSearchResultsMobile({
     ...rest
 }: JobSearchResultsProps & StackProps) {
     const [jobResults, setJobResults] = useState<SerializedJobPost[]>([]);
-    const [visited, setVisited] = useLocalStorage<SerializedJobPost[]>("visited", []);
+    const { addVisited, visited } = useVisited(jobScrapers[engineIndex].name);
     const [showVisited, setShowVisited] = useState(false);
     
     useEffect(() => {
@@ -36,6 +37,7 @@ export default function JobSearchResultsMobile({
             engine: jobScrapers[engineIndex].name
         });
 
+        // TODO: SWITCH TO REACT-QUERY
         fetch("api/search?" + query)
             .then(res => res.json())
             .then((data: SearchApiResponse) => {
@@ -44,7 +46,6 @@ export default function JobSearchResultsMobile({
                 }
                 setJobResults(data.data!);
                 setSearching && setSearching(false);
-                // TODO: MAKE A WAY WHEREE IT KEEPS THE VISITED DATA BETWEEN ENGINES USING REDUX
             })
             .catch(e => {
                 throw e;
@@ -52,13 +53,18 @@ export default function JobSearchResultsMobile({
     }, [engineIndex])
     
     const { results, visitedResults } = useMemo(() => {
-        const results = jobResults.map(v => !visited.find(_f => _f.job_link === v.job_link) ? <JobSearchResult 
-            key={v.job_link} 
-            jobData={v}  
-            onClick={() => setVisited([...visited, v])}
-        /> : undefined);
 
-        const visitedResults = visited.map(v => <JobSearchResult 
+        const results = jobResults
+            .filter(v => !visited!.posts.find((_v: SerializedJobPost) => _v.job_link === v.job_link))
+            .map(v =>  
+            <JobSearchResult 
+                key={v.job_link} 
+                jobData={v}  
+                onClick={() => addVisited(v)}
+            />
+        );
+
+        const visitedResults = visited!.posts.map((v: SerializedJobPost) => <JobSearchResult 
             key={v.job_link}
             jobData={v}
             visited
@@ -79,12 +85,12 @@ export default function JobSearchResultsMobile({
                 color="teal"
                 textDecoration={"underline"}
                 cursor="pointer"
-                display={visited.length > 0 ? "block" : "none"}
+                display={visited!.posts.length > 0 ? "block" : "none"}
                 onClick={() => setShowVisited(v => !v)}
             >
                 {
                     !showVisited ? 
-                    `Show ${visited.length} viewed job posts.` :
+                    `Show ${visited!.posts.length} viewed job posts.` :
                     "Hide viewed job posts."
                 }
             </Text>

@@ -39,7 +39,7 @@ export class LinkedinJobScraper implements JobSearchService {
                 },
                 postedDate: new Date(searchResults[i]!.querySelector("time")!.getAttribute("datetime")!),
                 formattedDate: null,
-                job_link: new URL(searchResults[i]!.querySelector(".base-card__full-link")!.getAttribute("href")!)
+                job_link: new URL(searchResults[i]!.querySelector(".base-card__full-link")!.getAttribute("href")!.split("/?")[0])
             });
         }
 

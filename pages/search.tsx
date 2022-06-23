@@ -84,7 +84,7 @@ export default function SearchPage({}: SearchPageProps) {
                 gap={2}
             >
                 <GridItem rowSpan={8} colSpan={2} mt="1em">
-                <JootLogo w={{base: "12em", lg: "10em"}} mb="1em" />
+                <JootLogo w={{base: "12em", lg: "10em"}} mx="0" mb="1em" />
                     <Heading 
                         size={"md"}
                         fontWeight="semibold" 

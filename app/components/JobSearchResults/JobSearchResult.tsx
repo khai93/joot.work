@@ -24,6 +24,11 @@ export default function JobSearchResult({
     const prettyTimeDiff = useMemo(() => jobData.postedDate != null ? getTimeDifference(new Date(jobData.postedDate), new Date(Date.now())) : jobData.formattedDate || "Time Unknown", [jobData]);
     const isRecent = prettyTimeDiff.indexOf("hour") !== -1 || 
                      prettyTimeDiff.includes('Today');
+
+    const handleVisit = () => {
+        window.open(jobData.job_link!, "Job Application", "toolbar=no,resizable=no,width=600,height=1000")
+        onClick && onClick();
+    }
     return (
         <Flex
             padding="1em"
@@ -31,19 +36,19 @@ export default function JobSearchResult({
             borderRadius="4px"
             gap="20px"
             backgroundColor={visited ? "gray.100" : ""}
-            onClick={onClick}
-            _hover={{textDecor: "underline"}}
         >
             <Box width="35px">
-                <Image 
-                    src={jobData.company.logoUrl || "https://placehold.jp/64x64.png"} 
-                    alt={jobData.company.company_name + "'s Logo Image"} 
-                    width={"100%"}
-                    height={"100%"}
-                    w="auto"
-                    textDecor="none"
-                    h="auto"
-                />
+                <a href={jobData.company.company_link!} target="_blank" rel="opopener noreferrer">
+                    <Image 
+                        src={jobData.company.logoUrl || "https://placehold.jp/64x64.png"} 
+                        alt={jobData.company.company_name + "'s Logo Image"} 
+                        width={"100%"}
+                        height={"100%"}
+                        w="auto"
+                        textDecor="none"
+                        h="auto"
+                    />
+                </a>
             </Box>
             <Box
                 margin="0"
@@ -53,22 +58,23 @@ export default function JobSearchResult({
                     fontWeight={isRecent ? "bold" : "semibold"}
                     color={isRecent ? "blue.500" : "gray.600"}
                     mb="5px"
-                    
                 >
                     Posted {prettyTimeDiff}
                 </Text>
                 <Heading
                     fontSize="lg"
                     margin="0"
-                    _hover={{cursor: "pointer"}}
-                    onClick={() => window.open(jobData.job_link!, "Job Application", "toolbar=no,resizable=no,width=600,height=1000")}
+                    _hover={{
+                        cursor: "pointer", 
+                        opacity: 0.8,
+                        transform: "scale(103%)"
+                    }}
+                    onClick={handleVisit}
                 >
                     {jobData.job_title}
                 </Heading>
                 <a href={jobData.company.company_link!} target="_blank" rel="opopener noreferrer">
-                    <Text>
-                        {jobData.company.company_name}
-                    </Text>
+                    {jobData.company.company_name}
                 </a>
             </Box>
         </Flex>

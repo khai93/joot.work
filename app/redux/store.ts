@@ -2,14 +2,31 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { configureStore } from "@reduxjs/toolkit";
-import { applyMiddleware } from "redux";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import persistReducer from "redux-persist/lib/persistReducer";
+import persistStore from "redux-persist/lib/persistStore";
+import { persistConfig } from "./persist";
 import visitedReducer from "./visitedReducer";
 
-const store = configureStore({
-    reducer: {
-        visited: visitedReducer
-    }
+const reducers = combineReducers({
+    visited: visitedReducer
 });
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+            }
+        })
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+
+export const persistor = persistStore(store);

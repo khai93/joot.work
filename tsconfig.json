@@ -22,7 +22,8 @@
       "@/styles/*": ["app/styles/*"],
       "@/core/*": ["app/core/*"],
       "@/services/*": ["app/services/*"],
-      "@/app/*": ["app/*"]
+      "@/app/*": ["app/*"],
+      "@/redux/*": ["app/redux/*"]
     },
     "jsx": "preserve",
     "incremental": true

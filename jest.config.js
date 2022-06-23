@@ -14,7 +14,7 @@ const customJestConfig = {
 
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
     '^@/core/(.*)$': '<rootDir>/app/core/$1',
-    '^@/services/(.*)$': '<rootDir>/app/services/$1',
+    '^@/services/(.*)$': '<rootDir>/app/services/$1'
   },
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
