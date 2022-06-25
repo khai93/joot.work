@@ -41,7 +41,9 @@ const visitedSlice = createSlice({
             if (action.payload == null) throw new Error("Remove Payload is undefined");
             const found = state.findIndex(v => v.engine === action.payload.engine);
             if (found === -1) throw new Error("Engine '" + action.payload.engine + "' does not exist.");
-            state[found].posts = state[found].posts.filter(v => v.job_id !== action.payload.post.job_id);
+            state[found].posts = state[found].posts.filter(v => v.job_link !== action.payload.post.job_link);
+            console.log(state[found].posts);
+            return state;
         }
     }
 });

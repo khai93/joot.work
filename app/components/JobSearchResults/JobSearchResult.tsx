@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import { JobPost, SerializedJobPost } from "@/core/JobPostService";
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { Image } from "../Image";
 
 import Link from "next/link";
@@ -14,11 +14,13 @@ export interface JobSearchResultProps {
     jobData: SerializedJobPost,
     visited?: boolean,
     onClick?: () => void
+    onRemove?: () => void
 }
 
 export default function JobSearchResult({
     jobData,
     onClick,
+    onRemove,
     visited
 }: JobSearchResultProps) {
     const prettyTimeDiff = useMemo(() => jobData.postedDate != null ? getTimeDifference(new Date(jobData.postedDate), new Date(Date.now())) : jobData.formattedDate || "Time Unknown", [jobData]);
@@ -29,6 +31,7 @@ export default function JobSearchResult({
         window.open(jobData.job_link!, "Job Application", "toolbar=no,resizable=no,width=600,height=1000")
         onClick && onClick();
     }
+
     return (
         <Flex
             padding="1em"
@@ -58,6 +61,7 @@ export default function JobSearchResult({
                     fontWeight={isRecent ? "bold" : "semibold"}
                     color={isRecent ? "blue.500" : "gray.600"}
                     mb="5px"
+                    pointerEvents={"none"}
                 >
                     Posted {prettyTimeDiff}
                 </Text>
@@ -77,6 +81,16 @@ export default function JobSearchResult({
                     {jobData.company.company_name}
                 </a>
             </Box>
+            {
+                visited &&
+                <Button
+                    backgroundColor={"red.500"}
+                    color="white"
+                    margin="auto 0 auto auto"
+                    onClick={onRemove}
+                >Undo</Button>
+            }
+            
         </Flex>
     )
 }

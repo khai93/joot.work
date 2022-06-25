@@ -26,15 +26,17 @@ export default function JobSearchResultsMobile({
     ...rest
 }: JobSearchResultsProps & StackProps) {
     const [jobResults, setJobResults] = useState<SerializedJobPost[]>([]);
-    const { addVisited, visited } = useVisited(jobScrapers[engineIndex].name);
+    const { addVisited, visited, removeVisited } = useVisited(jobScrapers[engineIndex].name);
     const [showVisited, setShowVisited] = useState(false);
-    
+
+    const currentEngine = useMemo(() => jobScrapers[engineIndex].name, [jobScrapers, engineIndex]);
+
     useEffect(() => {
         setSearching && setSearching(true);
 
         const query = new URLSearchParams({
             keywords: keywords,
-            engine: jobScrapers[engineIndex].name
+            engine: currentEngine
         });
 
         // TODO: SWITCH TO REACT-QUERY
@@ -61,6 +63,7 @@ export default function JobSearchResultsMobile({
                 key={v.job_link} 
                 jobData={v}  
                 onClick={() => addVisited(v)}
+                onRemove={() => removeVisited({ engine: currentEngine, post: v })}
             />
         );
 
@@ -68,6 +71,7 @@ export default function JobSearchResultsMobile({
             key={v.job_link}
             jobData={v}
             visited
+            onRemove={() => removeVisited({ engine: currentEngine, post: v })}
             // onClick={() => setVisited(visitedArr => visitedArr.filter(_f => _f.job_link != v.job_link))}
         />);
 
