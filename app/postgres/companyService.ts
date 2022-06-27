@@ -12,7 +12,7 @@ export class PostgresCompanyService implements CompanyService {
     create(company: Company): Promise<Company> {
         return new Promise(async (resolve, reject) => {
             const res: QueryResult<Company> = await connectionPool.query(
-                'INSERT INTO company(company_name, company_link, logoUrl) VALUES($1, $2, $3) RETURNING *',
+                'INSERT INTO company(company_name, company_link, logoUrl) VALUES($1, $2, $3) ON CONFLICT (company_link) DO NOTHING RETURNING *',
                 [company.company_name, company.company_link.toString(), company.logoUrl.toString()]
             );
 

@@ -24,11 +24,11 @@ export class PostgresSearchCacheService implements SearchCacheService {
                     `,
                      [ keywords, engine ]
                 ); 
-                
+
                 if (res.rowCount === 0) return resolve(true);
                 const timeSinceLastUpdateInSec = (Date.now() -  new Date(res.rows[0].updated_at).getTime()) / 1000;
                 const expired = timeSinceLastUpdateInSec > 60 * 5;
-
+                console.log("It's been " + timeSinceLastUpdateInSec + "s since last update");
                 return resolve(expired);
             } catch (e) { reject(e) }
         });
@@ -37,8 +37,13 @@ export class PostgresSearchCacheService implements SearchCacheService {
         return new Promise(async (resolve, reject) => {
             if (keywords.length <= 3) return reject("Keywords need to be greater than 3 characters");
             await connectionPool.query(
-                `INSERT INTO search_cache (keywords, engine_name) VALUES ($1, $2)`,
-                [ keywords.toLowerCase(), engine ]
+                `INSERT INTO 
+                    search_cache (keywords, engine_name) 
+                VALUES ($1, $2) 
+                ON CONFLICT (keywords) 
+                DO 
+                    UPDATE SET updated_at = to_timestamp($3);`,
+                [ keywords.toLowerCase(), engine, Date.now() ]
             ).then(() => resolve()).catch(reject);
         });
     }

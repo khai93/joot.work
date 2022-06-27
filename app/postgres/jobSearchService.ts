@@ -22,8 +22,6 @@ export class PostgresJobScraper implements JobSearchService {
             }
         });
 
-        console.log(searchResults);
-
         return searchResults;
     }
 }

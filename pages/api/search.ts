@@ -56,6 +56,7 @@ export default async function handler(
           if (cacheExpired) {
             const jobPostService = container.get<JobPostService>(Symbols.jobPostService);
             await jobPostService.createOrUpdateMany(searchResult, engineName as string);
+            await cacheService.cache(keywords, engineName as string);
           }
           
           return res.json({
