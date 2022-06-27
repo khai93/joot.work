@@ -2,7 +2,7 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { JobPost } from "@/core/JobPost";
+import { JobPost } from "@/core/JobPostService";
 import { LinkedinJobScraper } from "./scraper";
 import { rest } from "msw";
 import { setupServer } from "msw/node";

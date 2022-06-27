@@ -21,7 +21,8 @@ export type SerializedJobPost = ReturnType<typeof serializeJobPost>;
 // JobPostService handles the creation of job posts in a database
 export interface JobPostService {
     create(post: JobPost, engine: string): Promise<void>;
-    get(opts: GetOptions<JobPost>): Promise<JobPost | undefined>;
+    createOrUpdateMany(posts: JobPost[], engine: string): Promise<void>;
+    get(opts: GetOptions<JobPost>): Promise<JobPost[]>;
     update(opts: UpdateOptions<JobPost>): Promise<void>;
 }
 

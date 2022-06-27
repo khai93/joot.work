@@ -9,12 +9,9 @@ import { IndeedJobScraper } from './indeed';
 import { PostgresCompanyService } from './postgres/companyService';
 import { PostgresJobPostService } from './postgres';
 import { PostgresSearchCacheService } from './postgres/searchCacheService';
+import { PostgresJobScraper } from './postgres/jobSearchService';
+import { Symbols } from './symbols';
 
-export const Symbols = {
-    companyService: Symbol.for("companyService"),
-    jobPostService: Symbol.for("jobPostService"),
-    searchCacheService: Symbol.for("searchCacheService")
-}
 
 const container = new Container();
 container.bind<LinkedinJobScraper>(LinkedinJobScraper).toSelf();
@@ -22,6 +19,7 @@ container.bind<IndeedJobScraper>(IndeedJobScraper).toSelf();
 container.bind<PostgresCompanyService>(Symbols.companyService).to(PostgresCompanyService);
 container.bind<PostgresJobPostService>(Symbols.jobPostService).to(PostgresJobPostService);
 container.bind<PostgresSearchCacheService>(Symbols.searchCacheService).to(PostgresSearchCacheService);
+container.bind<PostgresJobScraper>(PostgresJobScraper).toSelf();
 
 // icons are from iconify
 export const jobScrapers = [

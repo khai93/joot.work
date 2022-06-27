@@ -11,6 +11,6 @@ export type Company = {
 
 // CompanyService handles manipluating company data
 export interface CompanyService {
-    create(company: Company): Promise<void>;
+    create(company: Company): Promise<Company>;
     get(opts: Partial<Company>): Promise<Company | undefined>;
 }
