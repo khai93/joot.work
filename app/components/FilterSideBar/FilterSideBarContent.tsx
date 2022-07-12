@@ -2,28 +2,22 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
+import { JobSearchFilter } from "@/core/JobSearchService";
 import { Container, FormControl, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export interface FilterSideBarContentProps {
-
+    filterData: JobSearchFilter,
+    setFilterData: (v: JobSearchFilter) => void,
 }
 
 export default function FilterSideBarContent(
     {
-
+        filterData,
+        setFilterData
     }: FilterSideBarContentProps
 ) {
-    const router = useRouter();
-    const { initLocation, initRemote } = router.query;
-    const [remote, setRemote] = useState(0);
-
-    useEffect(() => {
-        if (!router.isReady) return;
-        if (initRemote !== undefined) setRemote(initRemote ? Number(initRemote) : 0);
-    }, [router.isReady]);
-
     return (
         <>
             <FormControl as="fieldset">
@@ -35,7 +29,7 @@ export default function FilterSideBarContent(
                 >
                     Remote
                 </FormLabel>
-                <RadioGroup defaultValue={remote} value={remote} onChange={v => setRemote(Number(v))}>
+                <RadioGroup defaultValue={2} value={filterData.remoteType} onChange={v => setFilterData({...filterData, remoteType: parseInt(v)})}>
                     <Stack spacing="0.8em">
                         <Radio value={0}>In-Office</Radio>
                         <Radio value={1}>Fully Remote</Radio>

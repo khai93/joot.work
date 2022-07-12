@@ -28,7 +28,17 @@ export class IndeedJobScraper implements JobSearchService {
     async search(keywords: string[], filters?: JobSearchFilter): Promise<JobPost[]> {
         const requestURL = new URL("https://www.indeed.com/jobs");
         requestURL.searchParams.append("q", keywords.join(" "));
+        requestURL.searchParams.append("start", filters?.page ? String(Math.max((filters.page - 1) * 10, 0)) : '0');
         
+        if (filters !== undefined && filters.remoteType && filters?.remoteType > 0) {
+            if (filters.remoteType === 1) {
+                requestURL.searchParams.append("sc", "0kf%3Aattr(DSQF7)%3B");
+            }
+            if (filters.remoteType === 2) {
+                requestURL.searchParams.append("sc", "0kf%3Aattr(VAMUB)%3B");
+            } 
+        }
+
         const { _body } = await parseFetchResponseText(await fetch(requestURL.toString(), { 
             headers: {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246",

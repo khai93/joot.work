@@ -14,7 +14,8 @@ import JobSearchResult from "./JobSearchResult";
 
 export interface JobSearchResultsProps {
     keywords: string,
-    searchFilter: JobSearchFilter,
+    filterData: JobSearchFilter,
+    setFilterData: (v: JobSearchFilter) => void,
     engineIndex: number,
     page: number,
     searching: boolean,
@@ -23,7 +24,8 @@ export interface JobSearchResultsProps {
 
 export default function JobSearchResultsMobile({
     keywords,
-    searchFilter,
+    filterData,
+    setFilterData,
     engineIndex,
     setSearching,
     page,
@@ -41,8 +43,8 @@ export default function JobSearchResultsMobile({
 
         const query = new URLSearchParams({
             keywords,
-            location: searchFilter.location || undefined,
-            remote: searchFilter.remoteType ? String(searchFilter.remoteType) : undefined,
+            location: filterData.location || undefined,
+            remote: filterData.remoteType ? String(filterData.remoteType) : undefined,
             page: String(page),
             engine: currentEngine || "linkedin"
         } as Record<string, string>);
@@ -60,7 +62,7 @@ export default function JobSearchResultsMobile({
             .catch(e => {
                 throw e;
             });
-    }, [engineIndex, page])
+    }, [engineIndex, page, filterData])
     
     const { results, visitedResults } = useMemo(() => {
 

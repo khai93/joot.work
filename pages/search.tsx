@@ -23,6 +23,7 @@ export interface SearchPageProps {
 export default function SearchPage({}: SearchPageProps) {
     const [searching, setSearching] = useState(false);
     const [activeEngineTab, setActiveEngineTab] = useState(0);
+    const [filterData, setFilterData] = useState<JobSearchFilter>({});
     const [pageNumber, setPageNumber] = useState(1);
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,13 +54,9 @@ export default function SearchPage({}: SearchPageProps) {
         setActiveEngineTab(index);
     }
 
-    const searchFilter: JobSearchFilter = {
-       
-    }
-
     return (
         <Container minWidth={{lg: "60%"}}>
-            <FilterSideBarDrawer isOpen={isOpen} onClose={onClose} />
+            <FilterSideBarDrawer isOpen={isOpen} onClose={onClose} filterData={filterData} setFilterData={setFilterData} />
             <Flex 
                 my={{base: "1em"}} 
                 position="relative"
@@ -90,7 +87,7 @@ export default function SearchPage({}: SearchPageProps) {
                 </TabList>
             </Tabs>
 
-            <JobSearchResults display={{lg:"none"}} page={pageNumber} engineIndex={activeEngineTab} setSearching={setSearching} searching={searching} keywords={keywords} searchFilter={searchFilter}  />
+            <JobSearchResults display={{lg:"none"}} page={pageNumber} engineIndex={activeEngineTab} setSearching={setSearching} searching={searching} keywords={keywords} filterData={filterData} setFilterData={setFilterData} />
             <Grid
                 display={{base:"none", lg: "grid"}}
                 templateRows='repeat(8, 1fr)'
@@ -110,7 +107,7 @@ export default function SearchPage({}: SearchPageProps) {
                     >
                         Search Filters
                     </Heading>
-                    <FilterSideBarContent />
+                    <FilterSideBarContent filterData={filterData} setFilterData={setFilterData} />
                 </GridItem>
                 <GridItem 
                     rowSpan={8} 
@@ -143,11 +140,10 @@ export default function SearchPage({}: SearchPageProps) {
                             }
                         </TabList>
                     </Tabs>
-                    <JobSearchResults engineIndex={activeEngineTab} page={pageNumber} setSearching={setSearching} keywords={keywords} searching={searching} searchFilter={searchFilter}/>
-                    
+                    <JobSearchResults engineIndex={activeEngineTab} page={pageNumber} setSearching={setSearching} keywords={keywords} searching={searching} filterData={filterData} setFilterData={setFilterData}/>
                 </GridItem>
             </Grid>
-            <Flex>
+            <Flex pl={{lg: "25%"}}>
                 <Button onClick={handlePrevPage} marginRight="auto" disabled={pageNumber === 0}>Prev</Button>
                 <Button onClick={handleNextPage}>Next</Button>
             </Flex>
