@@ -3,11 +3,11 @@
 // license that can be found in the LICENSE file.
 
 import { JobPost } from "./JobPostService";
-import { Location } from "./Location";
 
 export type JobSearchFilter = {
-    location?: Location,
+    location?: string,
     remoteType?: number // 0 - In-office, 1 - Remote Only, 2 - Hybrid
+    page?: number
 }
 
 /**

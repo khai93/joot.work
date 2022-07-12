@@ -3,12 +3,7 @@
 // license that can be found in the LICENSE file.import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { container, jobScrapers } from "@/app/di";
-import { PostgresJobPostService } from "@/app/postgres";
-import { PostgresCompanyService } from "@/app/postgres/companyService";
-import { PostgresJobScraper } from "@/app/postgres/jobSearchService";
-import { Symbols } from "@/app/symbols";
 import { JobPost, JobPostService, SerializedJobPost, serializeJobPost } from "@/core/JobPostService";
-import { SearchCacheService } from "@/core/SearchCacheService";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export type SearchApiResponse = {
@@ -22,7 +17,7 @@ export default async function handler(
     res: NextApiResponse<SearchApiResponse>
 ) {
     let searchResult: JobPost[] = [];
-      const { keywords, engine: engineName, page } = req.query;
+      const { keywords, engine: engineName, page, remote, location } = req.query;
 
       if (typeof(keywords) !== "string") return res.status(400).json({
         error: true,
@@ -39,25 +34,16 @@ export default async function handler(
           });
       }
 
-      const cacheService = container.get<SearchCacheService>(Symbols.searchCacheService);
-      const cacheExpired = await cacheService.getExpiredStatus(keywords as string, engineName as string);
-      
-      // TODO: handle cache
-      
-      let scraper = engine.get();
-
-      if (!cacheExpired) {
-        scraper = container.get<PostgresJobScraper>(PostgresJobScraper);
-      }
+      res.setHeader(
+        'Cache-Control', 'public, s-maxage=300, stale-while-revalidate=350'
+      );
 
       try {
-          searchResult = await scraper.search(keywords.split(" "));
-
-          if (cacheExpired) {
-            const jobPostService = container.get<JobPostService>(Symbols.jobPostService);
-            await jobPostService.createOrUpdateMany(searchResult, engineName as string);
-            await cacheService.cache(keywords, engineName as string);
-          }
+          const scraper = engine.get();
+          searchResult = await scraper.search(keywords.split(" "), {
+            page: page ? parseInt(page as string) : undefined,
+            remoteType: remote ? parseInt(remote as string) : undefined,
+          });
           
           return res.json({
             error: false,

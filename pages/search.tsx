@@ -8,6 +8,7 @@ import JobSearchResults from "@/app/components/JobSearchResults/JobSearchResults
 import JootLogo from "@/app/components/JootLogo"
 import { SearchForm } from "@/app/components/SearchForm"
 import { useRouterQuery } from "@/app/hooks/useRouterQuery"
+import { JobSearchFilter } from "@/core/JobSearchService"
 import { SettingsIcon } from "@chakra-ui/icons"
 import { Button, Container, Image, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
 import { Icon } from "@iconify/react"
@@ -22,12 +23,14 @@ export interface SearchPageProps {
 export default function SearchPage({}: SearchPageProps) {
     const [searching, setSearching] = useState(false);
     const [activeEngineTab, setActiveEngineTab] = useState(0);
+    const [pageNumber, setPageNumber] = useState(1);
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const keywords = useRouterQuery("keywords");
-
+    
     const handleSearchSubmit = (keywords: string, location: string) => {
+        if (searching) return;
         setSearching(true);
         router.push({
           pathname: "/search",
@@ -38,8 +41,20 @@ export default function SearchPage({}: SearchPageProps) {
         }, undefined, { shallow: false });
     }
 
+    const handleNextPage = () => {
+        setPageNumber(prev => prev + 1);
+    }
+
+    const handlePrevPage = () => {
+        setPageNumber(prev => Math.max(prev - 1, 0));
+    }
+
     const handleActiveEngineChange = (index: number) => {
         setActiveEngineTab(index);
+    }
+
+    const searchFilter: JobSearchFilter = {
+       
     }
 
     return (
@@ -75,7 +90,7 @@ export default function SearchPage({}: SearchPageProps) {
                 </TabList>
             </Tabs>
 
-            <JobSearchResults display={{lg:"none"}} engineIndex={activeEngineTab} setSearching={setSearching} searching={searching} keywords={keywords}  />
+            <JobSearchResults display={{lg:"none"}} page={pageNumber} engineIndex={activeEngineTab} setSearching={setSearching} searching={searching} keywords={keywords} searchFilter={searchFilter}  />
             <Grid
                 display={{base:"none", lg: "grid"}}
                 templateRows='repeat(8, 1fr)'
@@ -128,9 +143,14 @@ export default function SearchPage({}: SearchPageProps) {
                             }
                         </TabList>
                     </Tabs>
-                    <JobSearchResults engineIndex={activeEngineTab} setSearching={setSearching} keywords={keywords} searching={searching}/>
+                    <JobSearchResults engineIndex={activeEngineTab} page={pageNumber} setSearching={setSearching} keywords={keywords} searching={searching} searchFilter={searchFilter}/>
+                    
                 </GridItem>
             </Grid>
+            <Flex>
+                <Button onClick={handlePrevPage} marginRight="auto" disabled={pageNumber === 0}>Prev</Button>
+                <Button onClick={handleNextPage}>Next</Button>
+            </Flex>
         </Container>
     )
 }

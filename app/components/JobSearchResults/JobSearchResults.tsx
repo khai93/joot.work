@@ -6,6 +6,7 @@ import { jobScrapers } from "@/app/di";
 import { useLocalStorage } from "@/app/hooks/useLocalStorage";
 import { useVisited } from "@/app/hooks/useVisited";
 import { JobPost, SerializedJobPost, } from "@/core/JobPostService";
+import { JobSearchFilter } from "@/core/JobSearchService";
 import { SearchApiResponse } from "@/pages/api/search";
 import { Stack, StackProps, Text } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
@@ -13,15 +14,19 @@ import JobSearchResult from "./JobSearchResult";
 
 export interface JobSearchResultsProps {
     keywords: string,
+    searchFilter: JobSearchFilter,
     engineIndex: number,
+    page: number,
     searching: boolean,
     setSearching?: (b: boolean) => void;
 }
 
 export default function JobSearchResultsMobile({
     keywords,
+    searchFilter,
     engineIndex,
     setSearching,
+    page,
     searching,
     ...rest
 }: JobSearchResultsProps & StackProps) {
@@ -29,15 +34,18 @@ export default function JobSearchResultsMobile({
     const { addVisited, visited, removeVisited } = useVisited(jobScrapers[engineIndex].name);
     const [showVisited, setShowVisited] = useState(false);
 
-    const currentEngine = useMemo(() => jobScrapers[engineIndex].name, [jobScrapers, engineIndex]);
+    const currentEngine: string = useMemo(() => jobScrapers[engineIndex].name, [jobScrapers, engineIndex]);
 
     useEffect(() => {
         setSearching && setSearching(true);
 
         const query = new URLSearchParams({
-            keywords: keywords,
-            engine: currentEngine
-        });
+            keywords,
+            location: searchFilter.location || undefined,
+            remote: searchFilter.remoteType ? String(searchFilter.remoteType) : undefined,
+            page: String(page),
+            engine: currentEngine || "linkedin"
+        } as Record<string, string>);
 
         // TODO: SWITCH TO REACT-QUERY
         fetch("api/search?" + query)
@@ -52,7 +60,7 @@ export default function JobSearchResultsMobile({
             .catch(e => {
                 throw e;
             });
-    }, [engineIndex])
+    }, [engineIndex, page])
     
     const { results, visitedResults } = useMemo(() => {
 

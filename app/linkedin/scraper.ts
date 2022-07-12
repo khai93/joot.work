@@ -12,9 +12,13 @@ export class LinkedinJobScraper implements JobSearchService {
     constructor() {}
 
     async search(keywords: string[], filters?: JobSearchFilter): Promise<JobPost[]> {
-        const requestURL = new URL('https://www.linkedin.com/jobs/search/');
-        requestURL.searchParams.append("keywords", keywords.join(" "));
+        console.log(filters);
+        const requestURL = new URL('https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search');
+        requestURL.searchParams.append("keywords", keywords.join(" ")) ;
+        requestURL.searchParams.append("start", filters?.page ? String(Math.max(filters.page - 1, 0) * 25) : "0");
 
+        console.log(requestURL);
+        
         const { _document } = await parseFetchResponseHTML(await fetch(requestURL.toString(), { 
             headers: {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246",
@@ -25,13 +29,13 @@ export class LinkedinJobScraper implements JobSearchService {
 
         const output: JobPost[] = [];
         
-        const searchResults = _document.getElementsByClassName("jobs-search__results-list")[0].children;
+        const searchResults = _document.getElementsByTagName('li');
         
         for (let i = 0;i < searchResults.length;i++) {
             const subtitle = searchResults[i].querySelector(".base-search-card__subtitle");
             if (subtitle?.firstElementChild == null) continue;
             output.push({
-                job_title: searchResults[i]!.querySelector(".base-search-card__title")!.textContent!.trim(),
+                job_title: searchResults[i]!.querySelector(".sr-only")!.textContent!.trim(),
                 company: {
                     company_name: subtitle!.firstElementChild!.innerHTML.trim(),
                     company_link: new URL(subtitle!.firstElementChild!.getAttribute("href")!),
