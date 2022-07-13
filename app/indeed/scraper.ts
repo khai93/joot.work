@@ -30,13 +30,17 @@ export class IndeedJobScraper implements JobSearchService {
         requestURL.searchParams.append("q", keywords.join(" "));
         requestURL.searchParams.append("start", filters?.page ? String(Math.max((filters.page - 1) * 10, 0)) : '0');
         
-        if (filters !== undefined && filters.remoteType && filters?.remoteType > 0) {
+        if (filters?.remoteType) {
             if (filters.remoteType === 1) {
                 requestURL.searchParams.append("sc", "0kf%3Aattr(DSQF7)%3B");
             }
             if (filters.remoteType === 2) {
                 requestURL.searchParams.append("sc", "0kf%3Aattr(VAMUB)%3B");
             } 
+        }
+
+        if (filters?.location) {
+            requestURL.searchParams.append("l", filters.location);
         }
 
         const { _body } = await parseFetchResponseText(await fetch(requestURL.toString(), { 

@@ -12,11 +12,19 @@ export class LinkedinJobScraper implements JobSearchService {
     constructor() {}
 
     async search(keywords: string[], filters?: JobSearchFilter): Promise<JobPost[]> {
-        console.log(filters);
+  
         const requestURL = new URL('https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search');
         requestURL.searchParams.append("keywords", keywords.join(" ")) ;
-        requestURL.searchParams.append("start", filters?.page ? String(Math.max(filters.page - 1, 0) * 25) : "0");
+    
 
+        if (filters?.page) {
+            requestURL.searchParams.append("start", String(Math.max(filters.page - 1, 0) * 25));
+        }
+        
+        if (filters?.location) {
+            requestURL.searchParams.append("location", filters.location);
+        }
+        
         console.log(requestURL);
         
         const { _document } = await parseFetchResponseHTML(await fetch(requestURL.toString(), { 

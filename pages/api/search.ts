@@ -43,6 +43,7 @@ export default async function handler(
           searchResult = await scraper.search(keywords.split(" "), {
             page: page ? parseInt(page as string) : undefined,
             remoteType: remote ? parseInt(remote as string) : undefined,
+            location: location as string || ""
           });
           
           return res.json({

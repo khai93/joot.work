@@ -13,7 +13,7 @@ import { SettingsIcon } from "@chakra-ui/icons"
 import { Button, Container, Image, Flex, Grid, GridItem, Heading, useDisclosure, Tabs, TabList, Tab } from "@chakra-ui/react"
 import { Icon } from "@iconify/react"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { jobScrapers } from "../app/di"
 
 export interface SearchPageProps {
@@ -26,21 +26,31 @@ export default function SearchPage({}: SearchPageProps) {
     const [filterData, setFilterData] = useState<JobSearchFilter>({});
     const [pageNumber, setPageNumber] = useState(1);
     const router = useRouter();
+    const keywords: string | undefined = router.query.keywords as string;
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const keywords = useRouterQuery("keywords");
-    
     const handleSearchSubmit = (keywords: string, location: string) => {
         if (searching) return;
         setSearching(true);
+        setFilterData({
+            ...filterData,
+            location
+        });
         router.push({
           pathname: "/search",
           query: {
             keywords,
             location
           },
-        }, undefined, { shallow: false });
+        });
     }
+
+    useEffect(() => {
+        if (router.isReady) setFilterData({
+            location: router.query.location as string || ""
+        });
+    }, [router.isReady]);  
+
 
     const handleNextPage = () => {
         setPageNumber(prev => prev + 1);
@@ -54,7 +64,7 @@ export default function SearchPage({}: SearchPageProps) {
         setActiveEngineTab(index);
     }
 
-    return (
+    if (router.isReady) return (
         <Container minWidth={{lg: "60%"}}>
             <FilterSideBarDrawer isOpen={isOpen} onClose={onClose} filterData={filterData} setFilterData={setFilterData} />
             <Flex 

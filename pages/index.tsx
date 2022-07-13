@@ -21,6 +21,8 @@ const Home: NextPage = () => {
       query: {
         keywords,
       }
+    }, undefined, {
+      shallow: true
     });
   }
 
