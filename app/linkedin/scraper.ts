@@ -24,6 +24,11 @@ export class LinkedinJobScraper implements JobSearchService {
         if (filters?.location) {
             requestURL.searchParams.append("location", filters.location);
         }
+
+        if (filters?.remoteType) {
+            // f_WT is the query linkedin uses for job location
+            requestURL.searchParams.append("f_WT", String(filters.remoteType + 1));
+        }
         
         console.log(requestURL);
         

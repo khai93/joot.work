@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 import { JobSearchFilter } from "@/core/JobSearchService";
-import { Container, FormControl, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Container, FormControl, FormLabel, Heading, Input, InputGroup, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -18,6 +18,7 @@ export default function FilterSideBarContent(
         setFilterData
     }: FilterSideBarContentProps
 ) {
+    const [company, setCompany] = useState(filterData.company);
     return (
         <>
             <FormControl as="fieldset">
@@ -36,6 +37,25 @@ export default function FilterSideBarContent(
                         <Radio value={2}>Hybrid</Radio>
                     </Stack>
                 </RadioGroup>
+                <FormLabel 
+                    as="legend" 
+                    fontWeight="semibold" 
+                    fontSize={"lg"}
+                    mb={"0.5em"}
+                    mt={"1.5em"}
+                >
+                    Company
+                </FormLabel>
+                <InputGroup>
+                    <Input 
+                        placeholder="Facebook, Amazon, ..." 
+                        onChange={(e) => setCompany(e.target.value)}
+                        onSubmit={(e) => setFilterData({
+                            ...filterData,
+                            company
+                        })}
+                    />
+                </InputGroup>
             </FormControl>
         </>
     )

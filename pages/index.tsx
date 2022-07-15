@@ -44,7 +44,7 @@ const Home: NextPage = () => {
           mb={{base: "0.5em", lg: "3em"}} 
           loading={searching}
           additionalButtons={[
-            <a key="github" href="https://github.com/khai93/joot.work" target="_blank">
+            <a key="github" href="https://github.com/khai93/joot.work" target="_blank" rel="noreferrer">
                 <Button
                   marginTop={{base: "0.5em", lg: "0"}} 
                   bg="transparent"

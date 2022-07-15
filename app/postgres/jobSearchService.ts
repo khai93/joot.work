@@ -3,10 +3,9 @@
 // license that can be found in the LICENSE file.
 
 import { Symbols } from "@/app/symbols";
-import { JobPost, JobPostService } from "@/core/JobPostService";
+import type { JobPost, JobPostService } from "@/core/JobPostService";
 import { JobSearchFilter, JobSearchService } from "@/core/JobSearchService";
 import { inject, injectable } from "inversify";
-import { connectionPool } from "./connection";
 
 @injectable() 
 export class PostgresJobScraper implements JobSearchService {

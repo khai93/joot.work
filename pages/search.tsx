@@ -40,16 +40,25 @@ export default function SearchPage({}: SearchPageProps) {
           pathname: "/search",
           query: {
             keywords,
-            location
+            ...filterData
           },
+        }, undefined, {
+            shallow: false
         });
     }
 
     useEffect(() => {
         if (router.isReady) setFilterData({
-            location: router.query.location as string || ""
+            location: router.query.location as string || "",
+            remoteType: router.query.remoteType ? parseInt(router.query.remoteType as string) : 2
         });
     }, [router.isReady]);  
+
+    useEffect(() => {
+        if (router.isReady && !searching) {
+            handleSearchSubmit(keywords, filterData.location || "");
+        }
+    }, [router.isReady, filterData.remoteType]);
 
 
     const handleNextPage = () => {

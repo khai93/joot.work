@@ -2,12 +2,10 @@
 // Use of this source code is governed by a GNU General Public License v3.0
 // license that can be found in the LICENSE file.
 
-import { Company, CompanyService } from "@/core/CompanyService";
+import type { Company, CompanyService } from "@/core/CompanyService";
 import { JobPost, JobPostService, parseJobPost } from "@/core/JobPostService";
-import { SearchCacheService } from "@/core/SearchCacheService";
 import { GetOptions, UpdateOptions } from "@/core/ServiceOptions";
 import { inject, injectable } from "inversify";
-import { QueryResult } from "pg";
 import { Symbols } from "../symbols";
 import { connectionPool } from "./connection";
 

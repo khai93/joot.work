@@ -9,7 +9,8 @@ import { JobPost } from "./JobPostService";
 export type JobSearchFilter = {
     location?: string,
     remoteType?: number // 0 - In-office, 1 - Remote Only, 2 - Hybrid
-    page?: number
+    page?: number,
+    company?: string
 }
 
 /**
