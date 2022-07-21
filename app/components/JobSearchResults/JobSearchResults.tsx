@@ -115,6 +115,8 @@ export default function JobSearchResultsMobile({
             {
                 searching ? 
                 <Text fontWeight={"light"}>Parsing the best matches...</Text> :
+                results.length === 0 ? 
+                <Text fontWeight={"light"}>There was no results!</Text> :
                 results
             }
         </Stack>

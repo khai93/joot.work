@@ -30,7 +30,7 @@ export class IndeedJobScraper implements JobSearchService {
         requestURL.searchParams.append("q", keywords.join(" "));
         requestURL.searchParams.append("start", filters?.page ? String(Math.max((filters.page - 1) * 10, 0)) : '0');
         
-        if (filters?.remoteType) {
+        if (filters?.remoteType != undefined) {
             if (filters.remoteType === 1) {
                 requestURL.searchParams.append("sc", "0kf%3Aattr(DSQF7)%3B");
             }
@@ -39,24 +39,25 @@ export class IndeedJobScraper implements JobSearchService {
             } 
         }
 
-        if (filters?.location) {
-            requestURL.searchParams.append("l", filters.location);
+        if (filters?.location != null && filters?.location !== "undefined") {
+            requestURL.searchParams.append("l", filters!.location!);
         }
 
         const { _body } = await parseFetchResponseText(await fetch(requestURL.toString(), { 
             headers: {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246",
-                "Host": requestURL.host
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0",
+                "Host": requestURL.host,
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
             },
-            credentials: "same-origin"
+            credentials: "include"
         }));
 
         const output: JobPost[] = [];
 
-        const mainMatch = _body.match(/window\.mosaic\.providerData\["mosaic-provider-jobcards"]={(.*)};/m);
+        const mainMatch = _body.match(/window\.mosaic\.providerData\[\"mosaic-provider-jobcards\"]=\{(.*)\};/m);
 
         if (mainMatch == null) {
-            throw new Error('Linkedin data regex unexpectedly did not work.');
+            return [];
         }
 
         for (let result of Array.from(JSON.parse(`{${mainMatch[1]}}`).metaData.mosaicProviderJobCardsModel.results) as IndeedParseResult[]) {

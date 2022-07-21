@@ -30,8 +30,6 @@ export class LinkedinJobScraper implements JobSearchService {
             requestURL.searchParams.append("f_WT", String(filters.remoteType + 1));
         }
         
-        console.log(requestURL);
-        
         const { _document } = await parseFetchResponseHTML(await fetch(requestURL.toString(), { 
             headers: {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246",
